@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+
+from web import views as web_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
+    path('', web_views.homepage, name='homepage'),
+    path('find_influencers/', web_views.find_influencers, name='find_influencers')
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
