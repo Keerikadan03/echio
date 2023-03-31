@@ -2,6 +2,8 @@
 
 <form action="/api/add-campaign/" method="post">
 
+    {% csrf_token %}
+
     <label>Campaign Name:
         <input type="text" name="campaign_name" id="campaign_name" required/>
     </label>
