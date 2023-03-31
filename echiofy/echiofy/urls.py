@@ -23,5 +23,6 @@ from web import views as web_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', web_views.homepage, name='homepage'),
-    path('find_influencers/', web_views.find_influencers, name='find_influencers')
+    path('find_influencers/', web_views.find_influencers, name='find_influencers'),
+    path('create_campaign/', web_views.create_campaign, name='create_campaign')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

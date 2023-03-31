@@ -1,0 +1,49 @@
+{% include 'navbar.html' %}
+
+<form action="/api/add-campaign/" method="post">
+
+    <label>Campaign Name:
+        <input type="text" name="campaign_name" id="campaign_name" required/>
+    </label>
+
+    <label>Campaign Description:
+        <input type="text" name="description" id="description" required/>
+    </label>
+
+    <label>Platforms:
+        <input type="checkbox" name="platform_instagram" id="platform_instagram" />
+        <input type="checkbox" name="platform_youtube" id="platform_youtube" />
+    </label>
+
+    <label>Primary Objective
+        <select name="primary_objective" id="primary_objective" required>
+            <option value="reach">Reach</option>
+            <option value="content_creation">Content Creation</option>
+            <option value="engagement">Engagement</option>
+        </select>
+    </label>
+
+    <label> Brand
+        <input type="text" name="brand" id="brand" required/>
+    </label>
+
+    <label> Payment type
+        <select name="payment_type" id="payment_type" required>
+            <option value="paid">Paid</option>
+            <option value="barter">Barter</option>
+        </select>
+    </label>
+
+    <label> Budget
+        <input type="number" name="budget" id="budget" required/>
+    </label>
+
+    <label> Payment Delay (Days)
+        <input type="number" name="payment_delay_days" id="payment_delay_days" required/>
+    </label>
+
+    <label> Tentative Payout
+        <input type="number" name="tentative_payout" id="tentative_payout" required/>
+    </label>
+
+</form>
