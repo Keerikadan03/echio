@@ -1,7 +1,7 @@
 import pymongo
 
 
-pymongo_client = pymongo.MongoClient("mongodb://localhost:27017/")
+pymongo_client = pymongo.MongoClient("mongodb://localhost:27017")
 pymongo_db = pymongo_client["echiofy"]
 
 pymongo_users = pymongo_db["users"]

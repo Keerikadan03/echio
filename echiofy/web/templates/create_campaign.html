@@ -1,8 +1,12 @@
 {% include 'navbar.html' %}
 
-<form action="/api/add-campaign/" method="post">
+<form action="/api/create-campaign/" method="post">
 
     {% csrf_token %}
+
+    <label>Client Username:
+        <input type="text" name="client_username" id="client_username" required/>
+    </label>
 
     <label>Campaign Name:
         <input type="text" name="campaign_name" id="campaign_name" required/>
