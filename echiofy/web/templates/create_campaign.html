@@ -1,59 +1,101 @@
-{% include 'navbar.html' %}
+{% extends 'base.html' %}
 
-<form action="/api/create-campaign/" method="post">
+{% load sass_tags %}
 
-    {% csrf_token %}
+{% block title %}
+    Create Campaign
+{% endblock %}
 
-    <label>Client Username:
-        <input type="text" name="client_username" id="client_username" required/>
-    </label>
+{% block css %}
+    <link rel="stylesheet" href="{% sass_src 'scss/create-campaign.scss' %}">
+{% endblock %}
 
-    <label>Campaign Name:
-        <input type="text" name="campaign_name" id="campaign_name" required/>
-    </label>
+{% block body %}
 
-    <label>Campaign Description:
-        <input type="text" name="description" id="description" required/>
-    </label>
+    <form id="create-campaign-form" action="/api/create-campaign/" method="post">
 
-    <label>Platforms:
-        <input type="checkbox" name="platform_instagram" id="platform_instagram" />
-        <input type="checkbox" name="platform_youtube" id="platform_youtube" />
-    </label>
+        {% csrf_token %}
 
-    <label>Primary Objective
-        <select name="primary_objective" id="primary_objective" required>
-            <option value="reach">Reach</option>
-            <option value="content_creation">Content Creation</option>
-            <option value="engagement">Engagement</option>
-        </select>
-    </label>
+        <div class="mb-3">
+            <label class="form-label">Client Username:
+                <input class="form-control" type="text" name="client_username" id="client_username" placeholder="Username" required/>
+            </label>
+        </div>
 
-    <label> Brand
-        <input type="text" name="brand" id="brand" required/>
-    </label>
+        <div class="mb-3">
+            <label class="form-label">Campaign Name:
+                <input class="form-control" type="text" name="campaign_name" id="campaign_name" required/>
+            </label>
+        </div>
 
-    <label> Payment type
-        <select name="payment_type" id="payment_type" required>
-            <option value="paid">Paid</option>
-            <option value="barter">Barter</option>
-        </select>
-    </label>
+        <div class="mb-3">
+            <label class="form-label">Campaign Description:
+                <input class="form-control" type="text" name="description" id="description" required/>
+            </label>
+        </div>
 
-    <label> Budget
-        <input type="number" name="budget" id="budget" required/>
-    </label>
+        <div class="mb-3">
+            <label class="form-label">Platforms:
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="platform_instagram" id="platform_instagram" />
+                    <label class="form-check-label" for="platform_instagram"> Instagram </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="platform_youtube" id="platform_youtube" />
+                    <label class="form-check-label" for="platform_youtube"> YouTube </label>
+                </div>
+            </label>
+        </div>
 
-    <label> Payment Delay (Days)
-        <input type="number" name="payment_delay_days" id="payment_delay_days" required/>
-    </label>
+        <div class="mb-3">
+            <label class="form-label">Primary Objective
+                <select name="primary_objective" id="primary_objective" required>
+                    <option value="reach">Reach</option>
+                    <option value="content_creation">Content Creation</option>
+                    <option value="engagement">Engagement</option>
+                </select>
+            </label>
+        </div>
 
-    <label> Tentative Payout
-        <input type="number" name="tentative_payout" id="tentative_payout" required/>
-    </label>
+        <div class="mb-3">
+            <label class="form-label"> Brand
+                <input type="text" name="brand" id="brand" required/>
+            </label>
+        </div>
 
-    <label> Submit
-        <input type="submit" name="submit" id="submit" />
-    </label>
+        <div class="mb-3">
+            <label class="form-label"> Payment type
+                <select name="payment_type" id="payment_type" required>
+                    <option value="paid">Paid</option>
+                    <option value="barter">Barter</option>
+                </select>
+            </label>
+        </div>
 
-</form>
+        <div class="mb-3">
+            <label class="form-label"> Budget
+                <input type="number" name="budget" id="budget" required/>
+            </label>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"> Payment Delay (Days)
+                <input type="number" name="payment_delay_days" id="payment_delay_days" required/>
+            </label>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"> Tentative Payout
+                <input type="number" name="tentative_payout" id="tentative_payout" required/>
+            </label>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"> Submit
+                <input type="submit" name="submit" id="submit" />
+            </label>
+        </div>
+
+    </form>
+
+{% endblock %}

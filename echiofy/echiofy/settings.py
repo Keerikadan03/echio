@@ -30,13 +30,17 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+ADMIN_ENABLED = False
+
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'sass_processor',
 
     'web',
 ]
@@ -124,3 +128,15 @@ STATIC_ROOT = "static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SASS_PROCESSOR_ENABLED = True
+
+SASS_PROCESSOR_ROOT = 'sass-processor/'
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
+]
+
+SASS_OUTPUT_STYLE = 'compact'
