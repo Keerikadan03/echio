@@ -16,13 +16,13 @@ def user_register(request):
     else:
         form = UserRegisterForm()
     context = {'form': form}
-    return render(request, 'register.html', context)
+    return render(request, 'user/register.html', context)
 
 
 from django.contrib.auth.views import LoginView
 def user_login(request):
     return LoginView.as_view(
-            template_name='login.html',
+            template_name='user/login.html',
             authentication_form=UserLoginForm,
             next_page='homepage',
             ) (request)
@@ -31,5 +31,5 @@ from django.contrib.auth.views import LogoutView
 def user_logout(request):
     return LogoutView.as_view(
             next_page='user-logout',
-            template_name='logout.html',
+            template_name='user/logout.html',
             ) (request)

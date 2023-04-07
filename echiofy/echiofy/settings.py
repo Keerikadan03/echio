@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     'web',
     'user.apps.UserConfig',
+    'base.apps.BaseConfig',
 
 
 ]
