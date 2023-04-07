@@ -1,2 +1,3 @@
 django
 django-cripsy-forms
+crispy_bootstrap5

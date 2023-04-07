@@ -33,16 +33,21 @@ ALLOWED_HOSTS = []
 ADMIN_ENABLED = False
 
 INSTALLED_APPS = [
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
+    'crispy_bootstrap5',
 
     'sass_processor',
 
     'web',
+    'user.apps.UserConfig',
+
+
 ]
 
 MIDDLEWARE = [
@@ -140,3 +145,6 @@ STATICFILES_FINDERS = [
 ]
 
 SASS_OUTPUT_STYLE = 'compact'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"

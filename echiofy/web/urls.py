@@ -20,8 +20,8 @@ import web.views as web_views
 urlpatterns = [
 
     path('', web_views.homepage, name='homepage'),
-    path('login/', web_views.login, name='login'),
-    path('register/', web_views.signup, name='register'),
+    # path('login/', web_views.login, name='login'),
+    # path('register/', web_views.signup, name='register'),
     path('create_campaign/', web_views.create_campaign, name='create_campaign'),
     path('campaigns/', web_views.campaigns, name='campaigns'),
     path('find_influencers/', web_views.find_influencers, name='find_influencers'),
