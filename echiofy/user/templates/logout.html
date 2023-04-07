@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <h1>User Logout Page</h1>
+
+    You have been logged out.
+
+    <a href="{% url 'user-login' %}">Login</a>
+
+{% endblock %}
+

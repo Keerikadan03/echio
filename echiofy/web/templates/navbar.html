@@ -26,17 +26,26 @@
                         <a class="nav-link" href="/"> Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/login"> Login </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/register"> Register </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="/create_campaign"> Create Campaign </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/campaigns"> View Campaigns </a>
                     </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <p class="nav-link"> {{ user.username }} </p>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout"> Logout </a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login"> Login </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register"> Register </a>
+                        </li>
+                    {% endif %}
             </div>
         </nav>
     </div>

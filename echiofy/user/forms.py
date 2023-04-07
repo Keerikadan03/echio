@@ -10,4 +10,5 @@ class UserRegisterForm(UserCreationForm):
         fields = ['username', 'email', 'first_name', 'last_name', 'password1', 'password2']
 
 class UserLoginForm(AuthenticationForm):
-    pass
+    def confirm_login_allowed(self, user):
+        pass

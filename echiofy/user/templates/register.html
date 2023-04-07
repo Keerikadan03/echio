@@ -9,4 +9,6 @@
         {{ form|crispy }}
         <input type='submit' value='Submit' />
     </form>
+
+    <p>Already have an account? <a href="{% url 'user-login' %}">Login</a></p>
 {% endblock %}
