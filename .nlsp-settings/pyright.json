@@ -1,7 +1,7 @@
 {
     "executionEnvironments" : [
         {
-            "root" : "echiofy",
+            "root" : "./echiofy",
             "extraPaths": [
                 "echiofy/web",
                 "echiofy/api"
