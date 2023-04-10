@@ -5,6 +5,13 @@
 
     Client can view the details for the campaign and also edit them.
 
+    <a href="{% url 'campaigns' %}"> Back to Campaigns </a>
+
     <p> Campaign Name: {{ campaign.name }} </p>
+    <p> Campaign Description: {{ campaign.description }} </p>
+    <p> Campaign Start Date: {{ campaign.start_date }} </p>
+    <p> Campaign End Date: {{ campaign.end_date }} </p>
+    <p> Campaign Budget: {{ campaign.budget }} </p>
+
 
 {% endblock %}
