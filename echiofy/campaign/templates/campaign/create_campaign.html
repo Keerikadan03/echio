@@ -12,6 +12,8 @@
 
 {% block content %}
 
+    <a href="{% url 'campaigns' %}">Back to Campaign List</a>
+
     <form method="post">
 
         {% csrf_token %}
