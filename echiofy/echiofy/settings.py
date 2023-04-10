@@ -44,7 +44,6 @@ INSTALLED_APPS = [
 
     'sass_processor',
 
-    'web',
     'user.apps.UserConfig',
     'base.apps.BaseConfig',
 
@@ -149,3 +148,5 @@ SASS_OUTPUT_STYLE = 'compact'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+AUTH_USER_MODEL = 'user.UserProfile'
