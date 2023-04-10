@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     'user.apps.UserConfig',
     'base.apps.BaseConfig',
+    'campaign.apps.CampaignConfig',
 
 
 ]

@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.urls import path
 
-import web.views as web_views
+from .views import *
 
 urlpatterns = [
 
-    path('create_campaign/', web_views.create_campaign, name='create_campaign'),
-    path('campaigns/', web_views.campaigns, name='campaigns'),
-    path('find_influencers/', web_views.find_influencers, name='find_influencers'),
+    path('create_campaign/', create_campaign, name='create_campaign'),
+    path('campaigns/', campaigns, name='campaigns'),
+    path('campaigns/<int:id>', campaigns, name='campaign-details'),
+    path('find_influencers/', find_influencers, name='find_influencers'),
 
 ]

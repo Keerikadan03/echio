@@ -12,47 +12,28 @@
 
 {% block content %}
 
-    <form id="create-campaign-form" action="/api/create-campaign/" method="post">
+    <form method="post">
 
         {% csrf_token %}
 
         <div class="mb-3">
-            <label class="form-label">Client Username:
-                <input class="form-control" type="text" name="client_username" id="client_username" placeholder="Username" required/>
-            </label>
-        </div>
-
-        <div class="mb-3">
             <label class="form-label">Campaign Name:
-                <input class="form-control" type="text" name="campaign_name" id="campaign_name" required/>
+                <input class="form-control" type="text" name="name" required/>
             </label>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Campaign Description:
-                <input class="form-control" type="text" name="description" id="description" required/>
-            </label>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Platforms:
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="platform_instagram" id="platform_instagram" />
-                    <label class="form-check-label" for="platform_instagram"> Instagram </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="platform_youtube" id="platform_youtube" />
-                    <label class="form-check-label" for="platform_youtube"> YouTube </label>
-                </div>
+                <input class="form-control" type="text" name="description" required/>
             </label>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Primary Objective
                 <select name="primary_objective" id="primary_objective" required>
-                    <option value="reach">Reach</option>
-                    <option value="content_creation">Content Creation</option>
-                    <option value="engagement">Engagement</option>
+                    <option value="Reach">Reach</option>
+                    <option value="Content Creation">Content Creation</option>
+                    <option value="Engagement">Engagement</option>
                 </select>
             </label>
         </div>
@@ -66,8 +47,8 @@
         <div class="mb-3">
             <label class="form-label"> Payment type
                 <select name="payment_type" id="payment_type" required>
-                    <option value="paid">Paid</option>
-                    <option value="barter">Barter</option>
+                    <option value="Paid">Paid</option>
+                    <option value="Barter">Barter</option>
                 </select>
             </label>
         </div>

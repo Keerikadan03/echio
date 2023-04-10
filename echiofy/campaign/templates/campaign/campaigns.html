@@ -6,4 +6,8 @@
     View the campaigns you have created here.
     Client can select a campaign and that will open its details page. (different from landing page)
 
+    {% for campaign in campaigns %}
+        <p> {{ campaign.name }} </p>
+    {% endfor %}
+
 {% endblock %}
