@@ -1,3 +1,5 @@
 django
 django-crispy-forms
-crispy_bootstrap5
+crispy-bootstrap5==0.7
+pydantic==1.10.7
+django-libsass==0.9
