@@ -1,5 +1,6 @@
 from django.db import models
 from enum import Enum
+from user.models import UserProfile
 
 class PrimaryObjectiveEnum(str, Enum):
     CONTENT_CREATION = 'Content Creation'
@@ -24,4 +25,14 @@ class Campaign(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Influencer(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, blank=False)
+    avg_views = models.IntegerField(blank=True)
+    avg_likes = models.IntegerField(blank=True)
+    avg_comments = models.IntegerField(blank=True)
+    followers = models.IntegerField(blank=True)
+
 

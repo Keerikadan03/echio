@@ -85,10 +85,19 @@ WSGI_APPLICATION = 'echiofy.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+import dotenv
+dotenv.load_dotenv()
+
+import os
+ECHIO_MONGO_HOST = os.environ.get('ECHIO_MONGO_HOST')
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': 'echiofy',
+        'CLIENT': {
+            'host': ECHIO_MONGO_HOST,
+        },
     }
 }
 
