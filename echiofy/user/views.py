@@ -1,31 +1,37 @@
-from django.shortcuts import render
 from .forms import UserRegisterForm, UserLoginForm
 from django.contrib import messages
-from django.shortcuts import redirect
+from django.shortcuts import HttpResponse
 from django.contrib.auth import authenticate, login, logout
+from .models import UserProfile
+from django.views.decorators.http import require_http_methods
 
 # Create your views here.
 
+@require_http_methods(['POST'])
 def user_register(request):
-    if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, f'Your account has been created! You are now able to log in')
-            return redirect('user-login')
-    else:
-        form = UserRegisterForm()
-    context = {'form': form}
-    return render(request, 'user/register.html', context)
+    user = UserProfile(
+        username=request.POST['username'],
+        email=request.POST['email'],
+        first_name=request.POST['first_name'],
+        last_name=request.POST['last_name'],
+        is_influencer=request.POST['is_influencer'],
+            )
+    user.full_clean()
+    user.save()
+    return HttpResponse(b"User created", status_code=201)
 
 
-from django.contrib.auth.views import LoginView
+@require_http_methods(['GET'])
 def user_login(request):
-    return LoginView.as_view(
-            template_name='user/login.html',
-            authentication_form=UserLoginForm,
-            next_page='homepage',
-            ) (request)
+    username = request.GET['username']
+    password = request.GET['password']
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        return HttpResponse(b"User authenticated", status_code=200)
+    else:
+        return HttpResponse(b"User not authenticated", status_code=401)
+
+
 
 from django.contrib.auth.views import LogoutView
 def user_logout(request):

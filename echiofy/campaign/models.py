@@ -7,9 +7,12 @@ class PrimaryObjectiveEnum(str, Enum):
     REACH = 'Reach'
     ENGAGEMENT = 'Engagement'
 
+
 class PaymentTypeEnum(str, Enum):
     PAID = 'Paid'
     BARTER = 'Barter'
+
+
 
 class Campaign(models.Model):
     id = models.AutoField(primary_key=True)
