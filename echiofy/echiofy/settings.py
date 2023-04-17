@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 
+import dns.resolver
+dns.resolver.default_resolver=dns.resolver.Resolver(configure=False)
+dns.resolver.default_resolver.nameservers=['8.8.8.8']
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -47,6 +51,8 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'base.apps.BaseConfig',
     'campaign.apps.CampaignConfig',
+
+    'djongo',
 
 
 ]
@@ -95,6 +101,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'echiofy',
+        'ENFORCE_SCHEMA': False,
         'CLIENT': {
             'host': ECHIO_MONGO_HOST,
         },
