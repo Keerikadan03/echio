@@ -26,7 +26,7 @@ def user_login(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             User = get_user_model()
-            if not User.objects.get(username=username):
+            if not User.objects.filter(username=username).first():
                 messages.error(request, 'User does not exist')
             else:
                 user = authenticate(request, username=username, password=password)
@@ -45,6 +45,6 @@ def user_login(request):
 
 def user_logout(request):
     return LogoutView.as_view(
-            next_page='user-logout',
+            next_page='homepage',
             template_name='user/logout.html',
             ) (request)
