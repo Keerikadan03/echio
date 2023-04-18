@@ -1,85 +1,135 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% load sass_tags %} {% block title %} Create Campaign
+{% endblock %} {% block css %}
+<link
+  rel="stylesheet"
+  href="{% sass_src 'campaign/css/create-campaign.scss' %}"
+/>
+{% endblock %} {% block content %}
 
-{% load sass_tags %}
+<a href="{% url 'campaigns' %}" style="color: black; margin-left: 2rem"
+  >&lt; Go Back</a
+>
 
-{% block title %}
-    Create Campaign
-{% endblock %}
+<section class="vh-100">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100 ">
+      <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-12 col-md-10 col-lg-9 col-xl-8">
+          <div class="card" style="border-radius: 15px">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Create Campaign</h2>
 
-{% block css %}
-    <link rel="stylesheet" href="{% sass_src 'campaign/css/create-campaign.scss' %}">
-{% endblock %}
+              <form method="post">
+                {% csrf_token %}
 
-{% block content %}
+                <div class="mb-3">
+                  <label class="form-label col-md-12 col-sm-12"
+                    >Campaign Name:
+                    <div class="mt-2">{{ form.name }}</div>
+                    {% if form.name.errors %}
+                    <div class="text-warning">{{ form.name.errors }}</div>
+                    {% endif %}
+                  </label>
+                </div>
 
-    <a href="{% url 'campaigns' %}">Back to Campaign List</a>
+                <div class="mb-3">
+                  <label class="form-label col-md-12 col-sm-12"
+                    >Campaign Description:
+                    <div class="mt-2">{{ form.description }}</div>
+                    {% if form.description.errors %}
+                    <div class="text-warning">
+                      {{ form.description.errors }}
+                    </div>
+                    {% endif %}
+                  </label>
+                </div>
 
-    <form method="post">
+                <div class="mb-3">
+                  <label class="form-label col-md-12 col-sm-12">
+                    Brand
+                    <div class="mt-2">{{ form.brand }}</div>
+                    {% if form.brand.errors %}
+                    <div class="text-warning">{{ form.brand.errors }}</div>
+                    {% endif %}
+                  </label>
+                </div>
 
-        {% csrf_token %}
+                <div class="row">
+                  <div class="col-sm-6 mb-3">
+                    <label class="form-label col-md-12 col-sm-12"
+                      >Primary Objective
+                      <div class="mt-2">{{ form.primary_objective }}</div>
+                      {% if form.primary_objective.errors %}
+                      <div class="text-warning">
+                        {{ form.primary_objective.errors }}
+                      </div>
+                      {% endif %}
+                    </label>
+                  </div>
 
-        <div class="mb-3">
-            <label class="form-label">Campaign Name:
-                {{ form.name }}
-                {{ form.name.errors }}
-            </label>
+                  <div class="col-sm-6 mb-3">
+                    <label class="form-label col-md-12 col-sm-12">
+                      Payment type
+                      <div class="mt-2">{{ form.payment_type }}</div>
+                      {% if form.payment_type.errors %}
+                      <div class="text-warning">
+                        {{ form.payment_type.errors }}
+                      </div>
+                      {% endif %}
+                    </label>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label col-md-12 col-sm-12">
+                    Budget
+                    <div class="mt-2">{{ form.budget }}</div>
+                    {% if form.budget.errors %}
+                    <div class="text-warning">{{ form.budget.errors }}</div>
+                    {% endif %}
+                  </label>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label col-md-12 col-sm-12">
+                    Payment Delay (Days)
+                    <div class="mt-2">{{ form.payment_delay_days }}</div>
+                    {% if form.payment_delay_days.errors %}
+                    <div class="text-warning">
+                      {{ form.payment_delay_days.errors }}
+                    </div>
+                    {% endif %}
+                  </label>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label col-md-12 col-sm-12">
+                    Tentative Payout
+                    <div class="mt-2">{{ form.tentative_payout }}</div>
+                    {% if form.tentative_payout.errors %}
+                    <div class="text-warning">
+                      {{ form.tentative_payout.errors }}
+                    </div>
+                    {% endif %}
+                  </label>
+                </div>
+
+                <div class="mb-3 mt-4 col-sm-12">
+                  <input
+                    class="btn btn-primary btn-block col-sm-12"
+                    type="submit"
+                    value="Create Campaign"
+                  />
+                  <!-- <label class="form-label">
+            </label> -->
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-
-        <div class="mb-3">
-            <label class="form-label">Campaign Description:
-                {{ form.description }}
-                {{ form.description.errors }}
-            </label>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Primary Objective
-                {{ form.primary_objective }}
-                {{ form.primary_objective.errors }}
-            </label>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label"> Brand
-                {{ form.brand }}
-                {{ form.brand.errors }}
-            </label>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label"> Payment type
-                {{ form.payment_type }}
-                {{ form.payment_type.errors }}
-            </label>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label"> Budget
-                {{ form.budget }}
-                {{ form.budget.errors }}
-            </label>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label"> Payment Delay (Days)
-                {{ form.payment_delay_days }}
-                {{ form.payment_delay_days.errors }}
-            </label>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label"> Tentative Payout
-                {{ form.tentative_payout }}
-                {{ form.tentative_payout.errors }}
-            </label>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label"> Submit
-                <input type="submit" value="Create Campaign">
-            </label>
-        </div>
-
-    </form>
+      </div>
+    </div>
+  </div>
+</section>
 
 {% endblock %}
