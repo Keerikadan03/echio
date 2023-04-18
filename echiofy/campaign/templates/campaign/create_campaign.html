@@ -20,62 +20,63 @@
 
         <div class="mb-3">
             <label class="form-label">Campaign Name:
-                <input class="form-control" type="text" name="name" required/>
+                {{ form.name }}
+                {{ form.name.errors }}
             </label>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Campaign Description:
-                <input class="form-control" type="text" name="description" required/>
+                {{ form.description }}
+                {{ form.description.errors }}
             </label>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Primary Objective
-                <select name="primary_objective" id="primary_objective" required>
-                    <option value="Reach">Reach</option>
-                    <option value="Content Creation">Content Creation</option>
-                    <option value="Engagement">Engagement</option>
-                </select>
+                {{ form.primary_objective }}
+                {{ form.primary_objective.errors }}
             </label>
         </div>
 
         <div class="mb-3">
             <label class="form-label"> Brand
-                <input type="text" name="brand" id="brand" required/>
+                {{ form.brand }}
+                {{ form.brand.errors }}
             </label>
         </div>
 
         <div class="mb-3">
             <label class="form-label"> Payment type
-                <select name="payment_type" id="payment_type" required>
-                    <option value="Paid">Paid</option>
-                    <option value="Barter">Barter</option>
-                </select>
+                {{ form.payment_type }}
+                {{ form.payment_type.errors }}
             </label>
         </div>
 
         <div class="mb-3">
             <label class="form-label"> Budget
-                <input type="number" name="budget" id="budget" required/>
+                {{ form.budget }}
+                {{ form.budget.errors }}
             </label>
         </div>
 
         <div class="mb-3">
             <label class="form-label"> Payment Delay (Days)
-                <input type="number" name="payment_delay_days" id="payment_delay_days" required/>
+                {{ form.payment_delay }}
+                {{ form.payment_delay.errors }}
             </label>
         </div>
 
         <div class="mb-3">
             <label class="form-label"> Tentative Payout
-                <input type="number" name="tentative_payout" id="tentative_payout" required/>
+                {{ form.tentative_payout }}
+                {{ form.tentative_payout.errors }}
             </label>
         </div>
 
         <div class="mb-3">
             <label class="form-label"> Submit
-                <input type="submit" name="submit" id="submit" />
+                <input type="submit" value="Create Campaign">
             </label>
         </div>
 

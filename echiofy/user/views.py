@@ -26,7 +26,7 @@ def user_login(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             User = get_user_model()
-            if not User.objects.filter(username=username).exists():
+            if not User.objects.get(username=username):
                 messages.error(request, 'User does not exist')
             else:
                 user = authenticate(request, username=username, password=password)
