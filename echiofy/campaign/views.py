@@ -103,10 +103,10 @@ def campaigns(request):
     return render(request, TEMPLATE_CAMPAIGNS, context)
 
 def campaign_details(request, id : int):
-    campaign = Campaign.objects.get(id=id)
+    campaign = Campaign.objects.filter(id=id).first()
     if campaign is None:
         context = {}
-        return render(request, TEMPLATE_CAMPAIGN_NOT_FOUND, context)
+        return render(request, 'campaign/campaign_not_found.html', context)
 
     context = {'campaign': campaign}
     return render(request, TEMPLATE_CAMPAIGN_DETAILS, context)
