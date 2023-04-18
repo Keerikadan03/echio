@@ -7,6 +7,10 @@ from django.contrib.auth import get_user_model
 # Create your views here.
 
 def user_register(request):
+    if request.user.is_authenticated:
+        messages.info(request, 'You are already logged in')
+        return redirect('homepage')
+
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
@@ -20,6 +24,10 @@ def user_register(request):
 
 from django.contrib.auth.views import LogoutView
 def user_login(request):
+    if request.user.is_authenticated:
+        messages.info(request, 'You are already logged in')
+        return redirect('homepage')
+
     if request.method == 'POST':
         form = UserLoginForm(request.POST)
         if form.is_valid():
