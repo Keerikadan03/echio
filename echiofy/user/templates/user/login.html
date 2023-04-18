@@ -14,21 +14,21 @@
                   <!-- Email input -->
                   <h2 class="text-uppercase text-center mb-5">LOGIN HERE</h2>
                   <div class="form-outline mb-4">
-                    <input type="username" id="username" name="username" class="form-control" placeholder="Username"/>
+                      {{ form.username }}
                   </div>
-  
+
                   <!-- Password input -->
                   <div class="form-outline mb-4">
-                    <input type="password" id="password" name="password" class="form-control" placeholder="Password" />
+                      {{ form.password }}
                   </div>
-  
+
                   <!-- 2 column grid layout for inline styling -->
                   <div class="row mb-4">
                     <div class="col d-flex justify-content-center">
                         <p>Don't have an account? <a href="{% url 'user-register' %}">Register</a></p>
                     </div>
                   </div>
-  
+
                   <!-- Submit button -->
                   <button type="submit" class="btn btn-primary col-sm-12 btn-block">Sign in</button>
                 </form>

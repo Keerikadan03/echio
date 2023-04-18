@@ -43,42 +43,42 @@
                 {% csrf_token %}
 
                 <div class="form-outline mb-4">
-                  <input type="text" id="form3Example1cg" class="form-control" name="username" placeholder="Username" required/>
+                    {{ form.username }}
 
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input type="email" id="form3Example3cg" class="form-control" name="email" placeholder="Your Email" required/>
-                  
+                    {{ form.email }}
+
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-4">
-    
+
                       <div class="form-outline">
-                        <input type="text" id="firstName" class="form-control" name="first_name" placeholder="First Name" required/>
+                          {{ form.first_name }}
                       </div>
-    
+
                     </div>
                     <div class="col-md-6 mb-4">
-    
+
                       <div class="form-outline">
-                        <input type="text" id="lastName" class="form-control" name="last_name" placeholder="Last Name" required/>
+                          {{ form.last_name }}
                       </div>
-    
+
                     </div>
                   </div>
 
                 <div class="form-outline mb-4">
-                  <input type="password" id="form3Example4cg" class="form-control" name="password1" placeholder="Password" required/>
+                    {{ form.password1 }}
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input type="password" id="form3Example4cdg" class="form-control" name="password2" placeholder="Confirm password" required/>
+                    {{ form.password2 }}
                 </div>
 
                 <div class="form-check d-flex justify-content-center mb-4">
-                  <input class="form-check-input me-2" type="checkbox" value="True" name="is_influencer" id="form2Example3cg" required/>
+                    {{ form.is_influencer }}
                   <label class="form-check-label" for="form2Example3g">
                     Are You An Influencer?
                   </label>
