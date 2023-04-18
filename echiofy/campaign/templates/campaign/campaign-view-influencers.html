@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    View Influencers in your Campaign
+{% endblock %}
+
+{% block content %}
+    <a href="{% url 'campaign-overview' campaign.id %}"> Back to Campaign Overview </a>
+    Here you can view the influencers in your campaign.
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Campaign Overview
+{% endblock %}
+
+{% block content %}
+    {{ campaign }}
+
+
+    <a href="{% url 'campaign-details' campaign.id %}"> View campaign details </a>
+
+    <a href="{% url 'campaign-view-influencers' campaign.id %}"> View influencers in the campaign </a>
+
+{% endblock %}

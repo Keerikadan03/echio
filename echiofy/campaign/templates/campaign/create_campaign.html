@@ -56,7 +56,9 @@
         <div class="mb-3">
             <label class="form-label"> Budget
                 {{ form.budget }}
-                {{ form.budget.errors }}
+                <div style="background-color: red;">
+                    {{ form.budget.errors }}
+                </div>
             </label>
         </div>
 

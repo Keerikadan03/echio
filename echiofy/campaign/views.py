@@ -10,45 +10,46 @@ TEMPLATE_CAMPAIGNS = "campaign/campaigns.html"
 TEMPLATE_CAMPAIGN_DETAILS = "campaign/campaign_details.html"
 TEMPLATE_CAMPAIGN_NOT_FOUND = "campaign/campaign_not_found.html"
 TEMPLATE_FIND_INFLUENCERS = "campaign/find_influencers.html"
+TEMPLATE_CAMPAIGN_OVERVIEW = "campaign/campaign-overview.html"
+TEMPLATE_CAMPAIGN_VIEW_INFLUENCERS = "campaign/campaign-view-influencers.html"
 
 
-def create_campaign_old(request):
+def campaigns(request):
+
     if not request.user.is_authenticated:
-        messages.error(request, f'You must be logged in to create a campaign')
         return redirect('user-login')
 
-    if request.method == "POST":
-        post = request.POST.dict()
-        owner_user = request.user
-        name = post["name"]
-        description = post["description"]
-        primary_objective = post["primary_objective"]
-        brand = post["brand"]
-        payment_type = post["payment_type"]
-        budget = post["budget"]
-        payment_delay_days = post["payment_delay_days"]
-        tentative_payout = post["tentative_payout"]
+    campaigns = Campaign.objects.all().filter(owner_user=request.user)
+    context = {'campaigns': campaigns}
+    return render(request, TEMPLATE_CAMPAIGNS, context)
 
-        campaign = Campaign(
-            owner_user=owner_user,
-            name=name,
-            description=description,
-            primary_objective=primary_objective,
-            brand=brand,
-            payment_type=payment_type,
-            budget=budget,
-            payment_delay_days=payment_delay_days,
-            tentative_payout=tentative_payout,
-            )
-
-        campaign.save()
-
-        messages.success(request, f'Your campaign has been created!')
-
-        return redirect(f'/campaign/{campaign.id}')
+def campaign_overview(request, id : int):
+    if not request.user.is_authenticated:
+        return redirect('user-login')
 
     context = {}
-    return render(request, TEMPLATE_CREATE_CAMPAIGN, context)
+    campaign = Campaign.objects.filter(id=id).first()
+    if campaign is None:
+        return render(request, TEMPLATE_CAMPAIGN_NOT_FOUND, context)
+
+    context = {'campaign': campaign}
+    return render(request, TEMPLATE_CAMPAIGN_OVERVIEW, context)
+
+
+
+def campaign_details(request, id : int):
+    campaign = Campaign.objects.filter(id=id).first()
+    if campaign is None:
+        context = {}
+        return render(request, 'campaign/campaign_not_found.html', context)
+
+    context = {'campaign': campaign}
+    return render(request, TEMPLATE_CAMPAIGN_DETAILS, context)
+
+def find_influencers(request):
+    context = {}
+    return render(request, TEMPLATE_FIND_INFLUENCERS, context)
+
 
 def create_campaign(request):
     if not request.user.is_authenticated:
@@ -92,29 +93,16 @@ def create_campaign(request):
     context['form'] = form
     return render(request, TEMPLATE_CREATE_CAMPAIGN, context)
 
-
-def campaigns(request):
-
+def campaign_view_influencers(request, id : int):
     if not request.user.is_authenticated:
+        messages.error(request, f'You must be logged in to view influencers')
         return redirect('user-login')
 
-    campaigns = Campaign.objects.all().filter(owner_user=request.user)
-    context = {'campaigns': campaigns}
-    return render(request, TEMPLATE_CAMPAIGNS, context)
+    context = {}
 
-def campaign_details(request, id : int):
     campaign = Campaign.objects.filter(id=id).first()
     if campaign is None:
-        context = {}
         return render(request, 'campaign/campaign_not_found.html', context)
 
-    context = {'campaign': campaign}
-    return render(request, TEMPLATE_CAMPAIGN_DETAILS, context)
-
-def find_influencers(request):
-    context = {}
-    return render(request, TEMPLATE_FIND_INFLUENCERS, context)
-
-def test_form(request):
-    context = {}
-    return render(request, 'campaigns/test.html', context)
+    context['campaign'] = campaign
+    return render(request, TEMPLATE_CAMPAIGN_VIEW_INFLUENCERS, context)
