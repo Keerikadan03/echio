@@ -1,10 +1,8 @@
 from .forms import UserRegisterForm, UserLoginForm
 from django.contrib import messages
-from django.shortcuts import HttpResponse
-from django.contrib.auth import authenticate, login, logout
-from .models import UserProfile
-from django.views.decorators.http import require_http_methods
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
+from django.contrib.auth import get_user_model
 
 # Create your views here.
 
@@ -20,13 +18,29 @@ def user_register(request):
     return render(request, 'user/register.html', {'form': form})
 
 
-from django.contrib.auth.views import LogoutView, LoginView
+from django.contrib.auth.views import LogoutView
 def user_login(request):
-    return LoginView.as_view(
-            template_name='user/login.html',
-            authentication_form=UserLoginForm,
-            next_page='homepage',
-            ) (request)
+    if request.method == 'POST':
+        form = UserLoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            User = get_user_model()
+            if not User.objects.filter(username=username).exists():
+                messages.error(request, 'User does not exist')
+            else:
+                user = authenticate(request, username=username, password=password)
+                if user is not None:
+                    login(request, user)
+                    messages.success(request, 'Login successful')
+                    return redirect('homepage')
+                else:
+                    messages.error(request, 'Invalid username or password')
+        else:
+            messages.error(request, 'Invalid username or password')
+    else:
+        form = UserLoginForm()
+    return render(request, 'user/login.html', {'form': form})
 
 
 def user_logout(request):
