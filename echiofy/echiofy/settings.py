@@ -95,7 +95,8 @@ import dotenv
 dotenv.load_dotenv()
 
 import os
-ECHIO_MONGO_HOST = os.environ.get('ECHIO_MONGO_HOST')
+ECHIO_MONGO_HOST = os.environ.get('ECHIO_MONGO_CONNECTION_STRING')
+print(ECHIO_MONGO_HOST)
 
 DATABASES = {
     'default': {

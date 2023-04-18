@@ -5,8 +5,12 @@ from django.db import migrations
 
 def make_admin(apps, schema_editor):
     User = get_user_model()
-    user = User.objects.get(username='admin')
-    user.set_password('admin')
+    user = User.objects.create_superuser(
+            username='admin',
+            password='admin',
+            email='admin@example.com'
+            )
+    # user.set_password('admin')
 
 
 class Migration(migrations.Migration):
