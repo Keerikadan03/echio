@@ -21,7 +21,7 @@ urlpatterns = [
 
     path('create_campaign/', create_campaign, name='create-campaign'),
     path('campaigns/', campaigns, name='campaigns'),
-    path('campaigns/<int:id>', campaigns, name='campaign-details'),
+    path('campaigns/<int:id>', campaign_details, name='campaign-details'),
     path('find_influencers/', find_influencers, name='find_influencers'),
 
 ]

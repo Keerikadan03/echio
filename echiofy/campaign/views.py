@@ -82,7 +82,7 @@ def create_campaign(request):
                 else:
                     campaign.save()
                     messages.success(request, f'Your campaign has been created!')
-                    return redirect(f'/campaign/{campaign.id}')
+                    return redirect('campaign-details', id=campaign.id)
         else:
             messages.error(request, 'There are errors with your form.')
     else:
@@ -92,7 +92,7 @@ def create_campaign(request):
     return render(request, TEMPLATE_CREATE_CAMPAIGN, context)
 
 
-def campaigns(request, id=None):
+def campaigns(request):
 
     if not request.user.is_authenticated:
         return redirect('user-login')
@@ -102,7 +102,8 @@ def campaigns(request, id=None):
         context = {'campaigns': campaigns}
         return render(request, TEMPLATE_CAMPAIGNS, context)
 
-    campaign = Campaign.objects.get(id=id, owner_user=request.user)
+def campaign_details(request, id : int):
+    campaign = Campaign.objects.get(id=id)
     if campaign is None:
         context = {}
         return render(request, TEMPLATE_CAMPAIGN_NOT_FOUND, context)
