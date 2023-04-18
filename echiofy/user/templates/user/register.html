@@ -3,6 +3,10 @@
 {% block content %}
     <!-- <h1>Register User Page</h1> -->
 
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Gruppo&family=Open+Sans&display=swap');
+    </style>
+
     {% if form.errors %}
         {% for field in form %}
             {% for error in field.errors %}
@@ -11,23 +15,6 @@
         {% endfor %}
     {% endif %}
 
-    <!-- <form method='POST'>
-        {% csrf_token %}
-
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password1" placeholder="Password" required>
-        <input type="password" name="password2" placeholder="Confirm Password" required>
-        <input type="text" name="first_name" placeholder="First Name" required>
-        <input type="text" name="last_name" placeholder="Last Name" required>
-        <input type="checkbox" name="is_influencer" value="True">
-
-        <button type="submit">Register</button>
-    </form>
-
-    <p>Already have an account? <a href="{% url 'user-login' %}">Login</a></p> -->
-
-    <!-- newcode -->
 
     <section class="vh-100" >
   <div class="mask d-flex align-items-center h-100 gradient-custom-3">
@@ -36,7 +23,7 @@
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
           <div class="card" style="border-radius: 15px;">
             <div class="card-body p-5">
-              <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+              <h2 class="text-uppercase text-center mb-5" style="color: #05BFDB; font-family: 'Gruppo', cursive; font-weight: 900;">Create an account</h2>
 
               <form method='POST'>
 

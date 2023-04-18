@@ -6,9 +6,13 @@
 />
 {% endblock %} {% block content %}
 
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Gruppo&family=Open+Sans&display=swap');
+</style>
+
+
 <a href="{% url 'campaigns' %}" style="color: black; margin-left: 2rem"
-  >&lt; Go Back</a
->
+  >&lt; Go Back</a>
 
 <section class="vh-100">
   <div class="mask d-flex align-items-center h-100 gradient-custom-3">
@@ -17,7 +21,7 @@
         <div class="col-12 col-md-10 col-lg-9 col-xl-8">
           <div class="card" style="border-radius: 15px">
             <div class="card-body p-5">
-              <h2 class="text-uppercase text-center mb-5">Create Campaign</h2>
+              <h2 class="text-uppercase text-center mb-5" style="color: #05BFDB; font-family: 'Gruppo', cursive; font-weight: 900;">Create Campaign</h2>
 
               <form method="post">
                 {% csrf_token %}
