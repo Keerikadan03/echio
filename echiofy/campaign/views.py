@@ -12,6 +12,7 @@ TEMPLATE_FIND_INFLUENCERS = "campaign/find_influencers.html"
 
 def create_campaign(request):
     if not request.user.is_authenticated:
+        messages.error(request, f'You must be logged in to create a campaign')
         return redirect('user-login')
 
     if request.method == "POST":

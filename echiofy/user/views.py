@@ -20,22 +20,15 @@ def user_register(request):
     return render(request, 'user/register.html', {'form': form})
 
 
+from django.contrib.auth.views import LogoutView, LoginView
 def user_login(request):
-    if request.method == 'POST':
-        form = UserLoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(username=username, password=password)
-            if user:
-                login(request, user)
-                return redirect('user-logout')
-    else:
-        form = UserLoginForm()
-    return render(request, 'user/login.html', {'form': form})
+    return LoginView.as_view(
+            template_name='user/login.html',
+            authentication_form=UserLoginForm,
+            next_page='homepage',
+            ) (request)
 
 
-from django.contrib.auth.views import LogoutView
 def user_logout(request):
     return LogoutView.as_view(
             next_page='user-logout',
