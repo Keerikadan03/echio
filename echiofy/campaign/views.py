@@ -1,3 +1,4 @@
+from django.forms import model_to_dict
 from django.shortcuts import redirect, render
 from .models import Campaign
 from django.contrib import messages
@@ -61,7 +62,7 @@ def create_campaign(request):
         if form.is_valid():
             name = form.cleaned_data['name']
             owner_user = request.user
-            if Campaign.objects.filter(owner_user=owner_user).exists():
+            if Campaign.objects.filter(owner_user=owner_user, name=name).exists():
                 messages.error(request, f'A campaign with the name "{name}" already exists')
             else:
                 form_data = form.cleaned_data
@@ -97,10 +98,9 @@ def campaigns(request):
     if not request.user.is_authenticated:
         return redirect('user-login')
 
-    if id is None:
-        campaigns = Campaign.objects.all().filter(owner_user=request.user)
-        context = {'campaigns': campaigns}
-        return render(request, TEMPLATE_CAMPAIGNS, context)
+    campaigns = Campaign.objects.all().filter(owner_user=request.user)
+    context = {'campaigns': campaigns}
+    return render(request, TEMPLATE_CAMPAIGNS, context)
 
 def campaign_details(request, id : int):
     campaign = Campaign.objects.get(id=id)

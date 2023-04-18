@@ -7,10 +7,15 @@ class PrimaryObjectiveEnum(str, Enum):
     REACH = 'Reach'
     ENGAGEMENT = 'Engagement'
 
+    def __str__(self):
+        return self.value
+
 
 class PaymentTypeEnum(str, Enum):
     PAID = 'Paid'
     BARTER = 'Barter'
+    def __str__(self):
+        return self.value
 
 
 
@@ -19,9 +24,9 @@ class Campaign(models.Model):
     owner_user = models.ForeignKey('user.UserProfile', on_delete=models.CASCADE, blank=False)
     name = models.CharField(max_length=100, blank=False)
     description = models.TextField()
-    primary_objective = models.CharField(max_length=50, choices=[(tag, tag.value) for tag in PrimaryObjectiveEnum])
+    primary_objective = models.CharField(max_length=50, choices=[(tag.value, tag.value) for tag in PrimaryObjectiveEnum])
     brand = models.CharField(max_length=100)
-    payment_type = models.CharField(max_length=50, choices=[(tag, tag.value) for tag in PaymentTypeEnum])
+    payment_type = models.CharField(max_length=50, choices=[(tag.value, tag.value) for tag in PaymentTypeEnum])
     budget = models.IntegerField()
     payment_delay_days = models.IntegerField()
     tentative_payout = models.IntegerField()

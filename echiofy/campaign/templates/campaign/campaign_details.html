@@ -9,9 +9,14 @@
 
     <p> Campaign Name: {{ campaign.name }} </p>
     <p> Campaign Description: {{ campaign.description }} </p>
-    <p> Campaign Start Date: {{ campaign.start_date }} </p>
-    <p> Campaign End Date: {{ campaign.end_date }} </p>
-    <p> Campaign Budget: {{ campaign.budget }} </p>
+
+    Campaign Primary Objective: {{ campaign.primary_objective }}
+    Campaign Brand: {{ campaign.brand }}
+    Campaign Payment Type: {{ campaign.payment_type }}
+    Campaign Budget: {{ campaign.budget }}
+    Campaign Payment Delay Days: {{ campaign.payement_delay_days }}
+    Campaign Tentative Payout: {{ campaign.tentative_payout }}
+
 
 
 {% endblock %}
