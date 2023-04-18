@@ -7,8 +7,8 @@
         <div></div>
         <!--NAVBAR-->
 
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <a class="navbar-brand" href="/">Echio</a>
+        <nav class="navbar navbar-expand-lg navbar-dark" >
+            <a class="navbar-brand" href="/"><img src="../../assets/echio-removebg-preview.png" alt="logo"></a>
             <button
                 class="navbar-toggler"
                 type="button"
@@ -21,7 +21,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto" style="display: flex;align-items: center;">
                     <li class="nav-item">
                         <a class="nav-link" href="/"> Home</a>
                     </li>
@@ -32,8 +32,8 @@
                         <a class="nav-link" href="/campaigns"> View Campaigns </a>
                     </li>
                     {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <p class="nav-link"> {{ user.username }} </p>
+                        <li class="nav-item" style="display: flex;align-items: center;">
+                            <p class="nav-link mt-lg-3"> {{ user.username }} </p>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/logout"> Logout </a>
