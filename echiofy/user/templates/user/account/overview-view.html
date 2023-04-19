@@ -1,0 +1,18 @@
+{% extends 'user/account/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Account Overview
+{% endblock %}
+
+{% block settings_content %}
+
+    Overview
+
+    {{ user.username }}
+    {{ user.email }}
+    {{ user.first_name }}
+    {{ user.last_name }}
+
+{% endblock %}

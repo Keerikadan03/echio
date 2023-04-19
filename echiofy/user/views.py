@@ -16,6 +16,8 @@ def user_register(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Account created successfully')
+            if request.POST['is_influencer']:
+                return redirect('influencer-register')
             return redirect('user-login')
     else:
         form = UserRegisterForm()
@@ -56,3 +58,29 @@ def user_logout(request):
             next_page='homepage',
             template_name='user/logout.html',
             ) (request)
+
+
+def user_account_overview_view(request):
+    if not request.user.is_authenticated:
+        messages.info(request, 'You must be logged in for that action.')
+        return redirect('user-login')
+
+    context = {}
+
+    user = request.user
+    context['user'] = user
+
+    return render(request, 'user/account/overview-view.html', context)
+
+def user_account_influencer_view(request):
+    if not request.user.is_authenticated:
+        messages.info(request, 'You must be logged in for that action.')
+        return redirect('user-login')
+
+    context = {}
+
+    user = request.user
+    context['user'] = request.user
+
+    return render(request, 'user/account/influencer-view.html', context)
+

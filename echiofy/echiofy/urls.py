@@ -21,7 +21,7 @@ from django.urls import include
 
 
 urlpatterns = [
-    path('api/', include('api.urls')),
+    # path('api/', include('api.urls')),
     path('', include('base.urls')),
     path('', include('user.urls')),
     path('', include('campaign.urls')),

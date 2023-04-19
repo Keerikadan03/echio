@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Account Settings
+{% endblock %}
+
+{% block content %}
+
+    Account Settings
+
+    {% include 'user/account/nav.html' %}
+
+    {% block settings_content %}
+
+    {% endblock %}
+
+{% endblock %}
