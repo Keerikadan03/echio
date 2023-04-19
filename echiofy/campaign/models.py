@@ -30,6 +30,7 @@ class Campaign(models.Model):
     budget = models.IntegerField()
     payment_delay_days = models.IntegerField()
     tentative_payout = models.IntegerField()
+    influencers = models.ManyToManyField('Influencer', blank=True)
 
     def __str__(self):
         return self.name

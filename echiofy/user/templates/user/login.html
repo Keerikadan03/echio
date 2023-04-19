@@ -2,6 +2,10 @@
 
 {% block content %}
 
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Gruppo&family=Open+Sans&display=swap');
+</style>
+
     {% if form.errors %}
         <p>Your username and password didn't match. Please try again.</p>
     {% endif %}
@@ -10,7 +14,7 @@
                 <form class="bg-white rounded-3 shadow-5-strong p-5" style="border: 1px solid rgba(0, 0, 0, 0.244);" method="post">
                     {% csrf_token %}
                   <!-- Email input -->
-                  <h2 class="text-uppercase text-center mb-5">LOGIN HERE</h2>
+                  <h2 class="text-uppercase text-center mb-5" style="color: #05BFDB; font-family: 'Gruppo', cursive; font-weight: 900;">LOGIN HERE</h2>
                   <div class="form-outline mb-4">
                       {{ form.username }}
                       {{ form.username.errors }}

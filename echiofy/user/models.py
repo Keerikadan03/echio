@@ -8,5 +8,5 @@ class UserProfile(AbstractUser):
     email = models.EmailField(max_length=254, unique=True)
     first_name = models.CharField(max_length=30, blank=True)
     last_name = models.CharField(max_length=150, blank=True)
-    is_influencer = models.BooleanField(default=False) #type: ignore
+    # is_influencer = models.BooleanField(default=False) #type: ignore
 
