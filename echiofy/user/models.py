@@ -9,4 +9,13 @@ class UserProfile(AbstractUser):
     first_name = models.CharField(max_length=30, blank=True)
     last_name = models.CharField(max_length=150, blank=True)
     # is_influencer = models.BooleanField(default=False) #type: ignore
+    influencer = models.OneToOneField('Influencer', on_delete=models.CASCADE, blank=True, null=True, default=None)
+
+
+class Influencer(models.Model):
+    id = models.AutoField(primary_key=True)
+    avg_views = models.IntegerField(blank=True)
+    avg_likes = models.IntegerField(blank=True)
+    avg_comments = models.IntegerField(blank=True)
+    followers = models.IntegerField(blank=True)
 

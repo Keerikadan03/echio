@@ -52,7 +52,9 @@ INSTALLED_APPS = [
     'base.apps.BaseConfig',
     'campaign.apps.CampaignConfig',
 
-    'djongo',
+    # 'djongo',
+
+    'django_extensions',
 
 
 ]
@@ -98,14 +100,18 @@ import os
 ECHIO_MONGO_HOST = os.environ.get('ECHIO_MONGO_CONNECTION_STRING')
 print(ECHIO_MONGO_HOST)
 
+ECHIO_MYSQL_HOST = os.environ.get('ECHIO_MYSQL_HOST')
+ECHIO_MYSQL_USER = os.environ.get('ECHIO_MYSQL_USER')
+ECHIO_MYSQL_PASS = os.environ.get('ECHIO_MYSQL_PASS')
+ECHIO_MYSQL_DB = os.environ.get('ECHIO_MYSQL_DB')
+
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'echiofy',
-        'ENFORCE_SCHEMA': False,
-        'CLIENT': {
-            'host': ECHIO_MONGO_HOST,
-        },
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': ECHIO_MYSQL_DB,
+        'USER': ECHIO_MYSQL_USER,
+        'PASSWORD': ECHIO_MYSQL_PASS,
+        'HOST': ECHIO_MYSQL_HOST,
     }
 }
 

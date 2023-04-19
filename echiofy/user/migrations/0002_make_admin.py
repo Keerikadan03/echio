@@ -16,7 +16,7 @@ def make_admin(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('user', '0001_initial'),
+        ('user', '0004_auto_20230419_1916'),
     ]
 
     operations = [

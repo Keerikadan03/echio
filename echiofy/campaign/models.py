@@ -30,18 +30,11 @@ class Campaign(models.Model):
     budget = models.IntegerField()
     payment_delay_days = models.IntegerField()
     tentative_payout = models.IntegerField()
-    influencers = models.ManyToManyField('Influencer', blank=True)
+    influencers = models.ManyToManyField('user.Influencer', blank=True)
 
     def __str__(self):
         return self.name
 
 
-class Influencer(models.Model):
-    id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, blank=False)
-    avg_views = models.IntegerField(blank=True)
-    avg_likes = models.IntegerField(blank=True)
-    avg_comments = models.IntegerField(blank=True)
-    followers = models.IntegerField(blank=True)
 
 
