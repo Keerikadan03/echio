@@ -97,8 +97,6 @@ import dotenv
 dotenv.load_dotenv()
 
 import os
-ECHIO_MONGO_HOST = os.environ.get('ECHIO_MONGO_CONNECTION_STRING')
-print(ECHIO_MONGO_HOST)
 
 ECHIO_MYSQL_HOST = os.environ.get('ECHIO_MYSQL_HOST')
 ECHIO_MYSQL_USER = os.environ.get('ECHIO_MYSQL_USER')
