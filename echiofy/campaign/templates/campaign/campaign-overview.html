@@ -10,8 +10,8 @@
     {{ campaign }}
 
 
-    <a href="{% url 'campaign-details' campaign.id %}"> View campaign details </a>
+    <a href="{% url 'campaign-details-view' campaign.id %}"> View campaign details </a>
 
-    <a href="{% url 'campaign-view-influencers' campaign.id %}"> View influencers in the campaign </a>
+    <a href="{% url 'campaign-influencers-view' campaign.id %}"> View influencers in the campaign </a>
 
 {% endblock %}

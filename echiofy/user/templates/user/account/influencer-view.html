@@ -10,4 +10,13 @@
 
     Influencer Settings
 
+    {% for influencer in influencers %}
+        {{ influencer.user.first_name }}
+        {{ influencer.user.last_name }}
+        {{ influencer.avg_views }}
+        {{ influencer.avg_likes }}
+        {{ influencer.avg_comments }}
+        {{ influencer.followers }}
+    {% endfor %}
+
 {% endblock %}

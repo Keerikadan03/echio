@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Explore Influencers
+{% endblock %}
+
+{% block content %}
+    explore influencers
+
+    {% for influencer in influencers %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ influencer.user.first_name }} {{ influencer.user.last_name }}</h5>
+                <p class="card-text">Average Views: {{ influencer.avg_views }}</p>
+                <p class="card-text">Average Likes: {{ influencer.avg_likes }}</p>
+                <p class="card-text">Average Comments: {{ influencer.avg_comments }}</p>
+                <p class="card-text">Followers: {{ influencer.followers }}</p>
+                <a href="{% url 'influencer-landing' influencer.id %}" class="btn btn-primary">View Profile</a>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
