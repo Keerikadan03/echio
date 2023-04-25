@@ -1,29 +1,19 @@
-"""echiofy URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.urls import path
-
 from .views import *
 
 urlpatterns = [
 
-    path('create_campaign/', create_campaign, name='create-campaign'),
     path('campaigns/', campaigns, name='campaigns'),
-    path('campaigns/<int:id>', campaign_overview, name='campaign-overview'),
-    path('campaigns/<int:id>/details', campaign_details, name='campaign-details'),
-    path('find_influencers/', find_influencers, name='find_influencers'),
-    path('campaigns/<int:id>/view-influencers', campaign_view_influencers, name='campaign-view-influencers'),
+    path('campaigns/create', campaign_create, name='campaign-create'),
+    path('campaigns/<int:id>', campaign_landing, name='campaign-landing'),
+    path('campaigns/<int:id>/overview', campaign_overview, name='campaign-overview'),
+    path('campaigns/<int:id>/details', campaign_details_view, name='campaign-details-view'),
+    path('campaigns/<int:id>/details/edit', campaign_details_edit, name='campaign-details-edit'),
+    path('campaigns/<int:id>/influencers', campaign_influencers_view, name='campaign-influencers-view'),
+    path('campaigns/<int:id>/influencers/explore', campaign_influencers_explore, name='campaign-influencers-explore'),
+    # path('find_influencers/', find_influencers, name='find_influencers'),
+    # path('campaigns/<int:id>/view-influencers', campaign_view_influencers, name='campaign-view-influencers'),
+
+    path('influencer/<int:id>', influencer_landing, name='influencer-landing'),
 
 ]

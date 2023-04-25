@@ -39,12 +39,21 @@ def populate(apps, schema_editor):
     campaign6 = Campaign.objects.create(brand=brand1, name='campaign6', description='campaign6 description', primary_objective='Engagement', payment_type='Barter', budget=600, payment_delay_days=60, tentative_payout=60)
     campaign7 = Campaign.objects.create(brand=brand1, name='campaign7', description='campaign7 description', primary_objective='Content Creation', payment_type='Paid', budget=700, payment_delay_days=70, tentative_payout=70)
 
+    Influencer = apps.get_model('user', 'Influencer')
+
+    user5.influencer = Influencer.objects.create(avg_comments=10, avg_likes=1, avg_views=1, followers=1)
+    user6.influencer = Influencer.objects.create(avg_comments=20, avg_likes=2, avg_views=2, followers=2)
+    user7.influencer = Influencer.objects.create(avg_comments=100, avg_likes=10, avg_views=10, followers=10)
+    user8.influencer = Influencer.objects.create(avg_comments=200, avg_likes=20, avg_views=20, followers=20)
+    user9.influencer = Influencer.objects.create(avg_comments=1000, avg_likes=100, avg_views=100, followers=100)
+    user10.influencer = Influencer.objects.create(avg_comments=2000, avg_likes=200, avg_views=200, followers=200)
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
         ('campaign', '0006_relations_changes'),
+        ('user', '0007_influencer_social_nullable'),
     ]
 
     operations = [

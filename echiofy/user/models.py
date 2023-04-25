@@ -27,11 +27,17 @@ class UserProfile(AbstractUser):
 
 class Influencer(models.Model):
     id = models.AutoField(primary_key=True)
-    avg_views = models.IntegerField(blank=True)
-    avg_likes = models.IntegerField(blank=True)
-    avg_comments = models.IntegerField(blank=True)
-    followers = models.IntegerField(blank=True)
-    instagram_id = models.CharField(max_length=32, unique=True, blank=True, default=None)
-    youtube_id = models.CharField(max_length=32, unique=True, blank=True, default=None)
-    tiktok_id = models.CharField(max_length=32, unique=True, blank=True, default=None)
+    avg_views = models.IntegerField(default=0)
+    avg_likes = models.IntegerField(default=0)
+    avg_comments = models.IntegerField(default=0)
+    followers = models.IntegerField(default=0)
+    instagram_id = models.CharField(max_length=32, unique=True, blank=True, default=None, null=True)
+    youtube_id = models.CharField(max_length=32, unique=True, blank=True, default=None, null=True)
+    tiktok_id = models.CharField(max_length=32, unique=True, blank=True, default=None, null=True)
+
+    objects = models.Manager()
+
+    @property
+    def user(self):
+        return UserProfile.objects.get(influencer=self)
 

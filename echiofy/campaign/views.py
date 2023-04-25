@@ -1,6 +1,7 @@
 from django.forms import model_to_dict
 from django.shortcuts import redirect, render
 from .models import Campaign
+from user.models import Influencer
 from django.contrib import messages
 from .forms import *
 
@@ -15,7 +16,6 @@ TEMPLATE_CAMPAIGN_VIEW_INFLUENCERS = "campaign/campaign-view-influencers.html"
 
 
 def campaigns(request):
-
     if not request.user.is_authenticated:
         return redirect('user-login')
 
@@ -23,6 +23,18 @@ def campaigns(request):
     print(campaigns)
     context = {'campaigns': campaigns}
     return render(request, TEMPLATE_CAMPAIGNS, context)
+
+def campaign_landing(request, id : int):
+
+    context = {}
+    campaign = Campaign.objects.filter(id=id).first()
+
+    if campaign is None:
+        return render(request, TEMPLATE_CAMPAIGN_NOT_FOUND, context)
+
+    context = {'campaign': campaign}
+    return render(request, 'campaign/landing.html', context)
+
 
 def campaign_overview(request, id : int):
     if not request.user.is_authenticated:
@@ -33,26 +45,50 @@ def campaign_overview(request, id : int):
     if campaign is None:
         return render(request, TEMPLATE_CAMPAIGN_NOT_FOUND, context)
 
-    context = {'campaign': campaign}
+    if campaign not in request.user.campaigns:
+        messages.error(request, f'You do not have access to this campaign')
+        return render(request, 'not-allowed.html', context)
+
+    context['campaign'] = campaign
     return render(request, TEMPLATE_CAMPAIGN_OVERVIEW, context)
 
 
+def campaign_details_view(request, id : int):
+    if not request.user.is_authenticated:
+        return redirect('user-login')
 
-def campaign_details(request, id : int):
+    context = {}
+
     campaign = Campaign.objects.filter(id=id).first()
     if campaign is None:
-        context = {}
         return render(request, 'campaign/campaign_not_found.html', context)
 
-    context = {'campaign': campaign}
+    if campaign not in request.user.campaigns:
+        messages.error(request, f'You do not have access to this campaign')
+        return render(request, 'not-allowed.html', context)
+
+    context['campaign'] = campaign
     return render(request, TEMPLATE_CAMPAIGN_DETAILS, context)
 
-def find_influencers(request):
+def campaign_details_edit(request, id : int):
+    if not request.user.is_authenticated:
+        return redirect('user-login')
+
     context = {}
-    return render(request, TEMPLATE_FIND_INFLUENCERS, context)
+
+    campaign = Campaign.objects.filter(id=id).first()
+    if campaign is None:
+        return render(request, 'campaign/campaign_not_found.html', context)
+
+    if campaign not in request.user.campaigns:
+        messages.error(request, f'You do not have access to this campaign')
+        return render(request, 'not-allowed.html', context)
+
+    context['campaign'] = campaign
+    return render(request, 'campaign/campaign-details-edit.html', context)
 
 
-def create_campaign(request):
+def campaign_create(request):
     if not request.user.is_authenticated:
         messages.error(request, f'You must be logged in to create a campaign')
         return redirect('user-login')
@@ -94,7 +130,7 @@ def create_campaign(request):
     context['form'] = form
     return render(request, TEMPLATE_CREATE_CAMPAIGN, context)
 
-def campaign_view_influencers(request, id : int):
+def campaign_influencers_view(request, id : int):
     if not request.user.is_authenticated:
         messages.error(request, f'You must be logged in to view influencers')
         return redirect('user-login')
@@ -106,4 +142,51 @@ def campaign_view_influencers(request, id : int):
         return render(request, 'campaign/campaign_not_found.html', context)
 
     context['campaign'] = campaign
+
+    if campaign not in request.user.campaigns:
+        messages.error(request, f'You do not have access to this campaign')
+        return render(request, 'not-allowed.html', context)
+
+    influencers = campaign.influencers
+    context['influencers'] = influencers
+
     return render(request, TEMPLATE_CAMPAIGN_VIEW_INFLUENCERS, context)
+
+
+def campaign_influencers_explore(request, id : int):
+    if not request.user.is_authenticated:
+        messages.error(request, f'You must be logged in to view influencers')
+        return redirect('user-login')
+
+    context = {}
+
+    campaign = Campaign.objects.filter(id=id).first()
+    if campaign is None:
+        return render(request, 'campaign/campaign_not_found.html', context)
+
+    context['campaign'] = campaign
+
+    if campaign not in request.user.campaigns:
+        messages.error(request, f'You do not have access to this campaign')
+        return render(request, 'not-allowed.html', context)
+
+    # todo: params support
+
+    influencers = Influencer.objects.all()
+
+    context['influencers'] = influencers
+
+    return render(request, 'campaign/campaign-influencer-explore.html', context)
+
+
+def influencer_landing(request, id : int):
+    context = {}
+    influencer = Influencer.objects.filter(id=id).first()
+
+    if influencer is None:
+        messages.error(request, f'Influencer not found')
+        return render('influencer/influencer_not_found.html', context)
+
+    context['influencer'] = influencer
+    return render(request, 'influencer/influencer-landing.html', context)
+
