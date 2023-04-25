@@ -19,7 +19,8 @@ def campaigns(request):
     if not request.user.is_authenticated:
         return redirect('user-login')
 
-    campaigns = Campaign.objects.all().filter(owner_user=request.user)
+    campaigns = request.user.campaigns
+    print(campaigns)
     context = {'campaigns': campaigns}
     return render(request, TEMPLATE_CAMPAIGNS, context)
 

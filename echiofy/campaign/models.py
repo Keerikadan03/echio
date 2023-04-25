@@ -1,4 +1,3 @@
-from itertools import chain
 from django.db import models
 from enum import Enum
 
@@ -43,7 +42,7 @@ class Campaign(models.Model):
 
     @property
     def managers(self):
-        return chain(self.brand.managers, CampaignAdditionalManagers.objects.filter(campaign=self)) #type: ignore
+        return self.brand.managers | CampaignAdditionalManagers.objects.filter(campaign=self) #type: ignore
 
     @property
     def influencers(self):
@@ -61,7 +60,7 @@ class BrandMember(models.Model):
     def campaigns(self):
         if self.is_manager:
             return self.brand.campaigns #type: ignore
-        return chain(self.brand.campaigns, CampaignAdditionalManagers.objects.filter(manager=self)) #type: ignore
+        return self.brand.campaigns | CampaignAdditionalManagers.objects.filter(manager=self) #type: ignore
 
     objects = models.Manager()
 
