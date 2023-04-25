@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('user', '0004_auto_20230419_1916'),
+        ('user', '0003_create_influencer_model'),
         ('campaign', '0004_campaign_influencers'),
     ]
 

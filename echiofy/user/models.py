@@ -18,4 +18,7 @@ class Influencer(models.Model):
     avg_likes = models.IntegerField(blank=True)
     avg_comments = models.IntegerField(blank=True)
     followers = models.IntegerField(blank=True)
+    instagram_id = models.CharField(max_length=32, unique=True, blank=True, default=None)
+    youtube_id = models.CharField(max_length=32, unique=True, blank=True, default=None)
+    tiktok_id = models.CharField(max_length=32, unique=True, blank=True, default=None)
 
