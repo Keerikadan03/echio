@@ -99,18 +99,17 @@ def campaign_create(request):
         form = CampaignCreationForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
-            owner_user = request.user
-            if Campaign.objects.filter(owner_user=owner_user, name=name).exists():
+            if Campaign.objects.filter(name=name).exists():
                 messages.error(request, f'A campaign with the name "{name}" already exists')
             else:
                 form_data = form.cleaned_data
+                owner_user = request.user
                 try:
                     campaign = Campaign(
-                        owner_user=owner_user,
+                        owner_user = owner_user,
                         name=name,
                         description=form_data['description'],
                         primary_objective=form_data['primary_objective'],
-                        brand=form_data['brand'],
                         payment_type=form_data['payment_type'],
                         budget=form_data['budget'],
                         payment_delay_days=form_data['payment_delay_days'],
@@ -121,7 +120,7 @@ def campaign_create(request):
                 else:
                     campaign.save()
                     messages.success(request, f'Your campaign has been created!')
-                    return redirect('campaign-details', id=campaign.id)
+                    return redirect('campaign-details-view', id=campaign.id)
         else:
             messages.error(request, 'There are errors with your form.')
     else:

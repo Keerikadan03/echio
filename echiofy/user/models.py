@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models.fields.related_descriptors import QuerySet
-from campaign.models import BrandMember, Brand, Campaign
+from campaign.models import Campaign
 
 
 class UserProfile(AbstractUser):
@@ -14,15 +14,8 @@ class UserProfile(AbstractUser):
     influencer = models.OneToOneField('Influencer', on_delete=models.CASCADE, blank=True, null=True, default=None)
 
     @property
-    def brands(self):
-        return BrandMember.objects.filter(user=self)
-
-    @property
     def campaigns(self):
-        set = QuerySet(model=Campaign)
-        for brand in self.brands:
-            set = set | brand.campaigns
-        return set
+        return Campaign.objects.filter(owner_user=self)
 
 
 class Influencer(models.Model):

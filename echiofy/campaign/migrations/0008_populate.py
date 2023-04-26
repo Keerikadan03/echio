@@ -20,24 +20,15 @@ def populate(apps, schema_editor):
     user9 = User.objects.create_user(username="user9", password="user9", email="user9@example.com")
     user10 = User.objects.create_user(username="user10", password="user10", email="user10@example.com")
 
-    Brand = apps.get_model('campaign', 'Brand')
-    BrandMember = apps.get_model('campaign', 'BrandMember')
-
-    brand1 = Brand.objects.create(name='brand1', description='brand1')
-    BrandMember.objects.create(user=user1, brand=brand1, is_manager=True)
-    BrandMember.objects.create(user=user2, brand=brand1, is_manager=True)
-    BrandMember.objects.create(user=user3, brand=brand1, is_manager=False)
-    BrandMember.objects.create(user=user4, brand=brand1, is_manager=False)
-
     Campaign = apps.get_model('campaign', 'Campaign')
 
-    campaign1 = Campaign.objects.create(brand=brand1, name='campaign1', description='campaign1 description', primary_objective='Content Creation', payment_type='Paid', budget=100, payment_delay_days=10, tentative_payout=10)
-    campaign2 = Campaign.objects.create(brand=brand1, name='campaign2', description='campaign2 description', primary_objective='Reach', payment_type='Barter', budget=200, payment_delay_days=20, tentative_payout=20)
-    campaign3 = Campaign.objects.create(brand=brand1, name='campaign3', description='campaign3 description', primary_objective='Engagement', payment_type='Paid', budget=300, payment_delay_days=30, tentative_payout=30)
-    campaign4 = Campaign.objects.create(brand=brand1, name='campaign4', description='campaign4 description', primary_objective='Content Creation', payment_type='Barter', budget=400, payment_delay_days=40, tentative_payout=40)
-    campaign5 = Campaign.objects.create(brand=brand1, name='campaign5', description='campaign5 description', primary_objective='Reach', payment_type='Paid', budget=500, payment_delay_days=50, tentative_payout=50)
-    campaign6 = Campaign.objects.create(brand=brand1, name='campaign6', description='campaign6 description', primary_objective='Engagement', payment_type='Barter', budget=600, payment_delay_days=60, tentative_payout=60)
-    campaign7 = Campaign.objects.create(brand=brand1, name='campaign7', description='campaign7 description', primary_objective='Content Creation', payment_type='Paid', budget=700, payment_delay_days=70, tentative_payout=70)
+    campaign1 = Campaign.objects.create(owner_user=user1, name='campaign1', description='campaign1 description', primary_objective='Content Creation', payment_type='Paid', budget=100, payment_delay_days=10, tentative_payout=10)
+    campaign2 = Campaign.objects.create(owner_user=user1, name='campaign2', description='campaign2 description', primary_objective='Reach', payment_type='Barter', budget=200, payment_delay_days=20, tentative_payout=20)
+    campaign3 = Campaign.objects.create(owner_user=user1, name='campaign3', description='campaign3 description', primary_objective='Engagement', payment_type='Paid', budget=300, payment_delay_days=30, tentative_payout=30)
+    campaign4 = Campaign.objects.create(owner_user=user1, name='campaign4', description='campaign4 description', primary_objective='Content Creation', payment_type='Barter', budget=400, payment_delay_days=40, tentative_payout=40)
+    campaign5 = Campaign.objects.create(owner_user=user1, name='campaign5', description='campaign5 description', primary_objective='Reach', payment_type='Paid', budget=500, payment_delay_days=50, tentative_payout=50)
+    campaign6 = Campaign.objects.create(owner_user=user1, name='campaign6', description='campaign6 description', primary_objective='Engagement', payment_type='Barter', budget=600, payment_delay_days=60, tentative_payout=60)
+    campaign7 = Campaign.objects.create(owner_user=user1, name='campaign7', description='campaign7 description', primary_objective='Content Creation', payment_type='Paid', budget=700, payment_delay_days=70, tentative_payout=70)
 
     Influencer = apps.get_model('user', 'Influencer')
 
@@ -52,7 +43,7 @@ def populate(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('campaign', '0006_relations_changes'),
+        ('campaign', '0007_restore_old'),
         ('user', '0007_influencer_social_nullable'),
     ]
 
