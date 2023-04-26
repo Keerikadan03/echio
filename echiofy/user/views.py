@@ -16,8 +16,6 @@ def user_register(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Account created successfully')
-            if request.POST['is_influencer']:
-                return redirect('influencer-register')
             return redirect('user-login')
     else:
         form = UserRegisterForm()

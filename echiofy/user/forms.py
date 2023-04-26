@@ -8,7 +8,7 @@ from django import forms
 class UserRegisterForm(UserCreationForm):
     class Meta:
         model = UserProfile
-        fields = ['username', 'email', 'password1', 'password2', 'first_name', 'last_name', 'is_influencer']
+        fields = ['username', 'email', 'password1', 'password2', 'first_name', 'last_name']
 
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}))
@@ -16,7 +16,6 @@ class UserRegisterForm(UserCreationForm):
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Confirm Password'}))
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'}))
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}))
-    is_influencer = forms.BooleanField(widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
 
 
 
