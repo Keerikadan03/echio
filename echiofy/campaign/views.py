@@ -1,7 +1,7 @@
 from django.forms import model_to_dict
 from django.shortcuts import redirect, render
 from .models import Campaign
-from user.models import Influencer
+from user.models import Influencer, UserProfile
 from django.contrib import messages
 from .forms import *
 
@@ -180,12 +180,11 @@ def campaign_influencers_explore(request, id : int):
 
 def influencer_landing(request, id : int):
     context = {}
-    influencer = Influencer.objects.filter(id=id).first()
-
-    if influencer is None:
+    user = UserProfile.objects.filter(id=id)
+    if user is None or user.influencer is None:
         messages.error(request, f'Influencer not found')
         return render('influencer/influencer_not_found.html', context)
 
-    context['influencer'] = influencer
+    context['user'] = user
     return render(request, 'influencer/influencer-landing.html', context)
 

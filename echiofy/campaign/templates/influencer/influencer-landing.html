@@ -9,11 +9,11 @@
 {% block content %}
     Influencer Landing Page
 
-    {{ influencer.user.first_name }}
-    {{ influencer.user.last_name }}
-    {{ influencer.avg_views }}
-    {{ influencer.avg_likes }}
-    {{ influencer.avg_comments }}
-    {{ influencer.followers }}
+    {{ user.first_name }}
+    {{ user.last_name }}
+    {{ user.influencer.avg_views }}
+    {{ user.influencer.avg_likes }}
+    {{ user.influencer.avg_comments }}
+    {{ user.influencer.followers }}
 
 {% endblock %}
