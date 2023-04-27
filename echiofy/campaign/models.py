@@ -19,7 +19,7 @@ class PaymentTypeEnum(str, Enum):
 
 class CampaignInfluencers(models.Model):
     campaign = models.ForeignKey('Campaign', on_delete=models.CASCADE)
-    user = models.ForeignKey('user.UserProfile', on_delete=models.CASCADE)
+    influencer = models.ForeignKey('user.Influencer', on_delete=models.CASCADE)
 
     objects = models.Manager()
 
