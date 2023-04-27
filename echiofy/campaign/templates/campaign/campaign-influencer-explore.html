@@ -20,7 +20,11 @@
         <div id="cart-items">
 
         </div>
-        <button class="btn btn-primary" onclick="checkout()">Checkout</button>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.influencers }}
+            <button type="submit" class="btn btn-primary">Confirm</button>
+        </form>
     </div>
 
     {% for influencer in influencers %}

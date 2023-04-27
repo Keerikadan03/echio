@@ -12,3 +12,6 @@ class CampaignCreationForm(forms.Form):
     payment_delay_days = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control'}), required=False)
     tentative_payout = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control'}), required=False)
 
+
+class CampaignAddInfluencersForm(forms.Form):
+    influencers = forms.CharField(widget=forms.Textarea(attrs={'style': 'display: none;', 'id': 'form-input-influencers'}), required=True)

@@ -169,6 +169,46 @@ def campaign_influencers_explore(request, id : int):
         messages.error(request, f'You do not have access to this campaign')
         return render(request, 'not-allowed.html', context)
 
+
+    print("BBBBBBBBBBBBB")
+
+    if request.method == 'POST':
+        print("AAAAAAAAAAAAAAAAAAAAAA")
+        form = CampaignAddInfluencersForm(request.POST)
+
+        if not form.is_valid():
+            messages.error(request, f'Bad payload')
+            return redirect('campaign-overview', id=campaign.id)
+
+        influencer_ids = form.cleaned_data['influencers']
+        influencer_ids = influencer_ids.split(',')
+        influencer_ids = list(map(int, influencer_ids))
+
+        if len(influencer_ids) == 0:
+            messages.error(request, f'No influencers were selected')
+            return redirect('campaign-overview', id=campaign.id)
+
+        influencers = []
+        for influencer_id in influencer_ids:
+            influencer = Influencer.objects.filter(id=influencer_id).first()
+            if influencer is None:
+                messages.error(request, f'Bad paylod.')
+                return redirect('campaign-overview', id=campaign.id)
+            influencers.append(influencer)
+
+        n_influencers = 0
+        for influencer in influencers:
+            if CampaignInfluencers.objects.filter(campaign=campaign, influencer=influencer).exists():
+                continue
+            CampaignInfluencers.objects.create(campaign=campaign, influencer=influencer)
+            n_influencers += 1
+
+        messages.success(request, f'{n_influencers} influencers were added to your campaign')
+        return redirect('campaign-overview', id=campaign.id)
+
+    form = CampaignAddInfluencersForm()
+    context['form'] = form
+
     # todo: params support
 
     influencers = Influencer.objects.all()

@@ -45,6 +45,8 @@ function updateCart() {
 
 function addInfluencer(influencer_id) {
 
+    influencer_id = influencer_id.toString();
+
     let card = document.getElementById("influencer-card-" + influencer_id);
     if (card === null) return;
 
@@ -54,12 +56,26 @@ function addInfluencer(influencer_id) {
     button_cart_add.style.display = "none";
     button_cart_remove.style.display = "block";
 
+    if (CART.has(influencer_id)) return;
+
+    let form_input_influencers = document.getElementById("form-input-influencers");
+    let form_input_influencers_value = form_input_influencers.value;
+    let form_input_influencers_list = form_input_influencers_value.split(",");
+    form_input_influencers_list = form_input_influencers_list.filter((value) => value !== "");
+    form_input_influencers_list.push(influencer_id);
+    form_input_influencers_value = form_input_influencers_list.join(",");
+    form_input_influencers.value = form_input_influencers_value;
+
+    console.log(form_input_influencers.value)
+
     CART.add(influencer_id);
 
     updateCart();
 }
 
 function removeInfluencer(influencer_id) {
+
+    influencer_id = influencer_id.toString();
 
     let card = document.getElementById("influencer-card-" + influencer_id);
     if (card === null) return;
@@ -70,8 +86,19 @@ function removeInfluencer(influencer_id) {
     button_cart_add.style.display = "block";
     button_cart_remove.style.display = "none";
 
+    if (!CART.has(influencer_id)) return;
+
+    let form_input_influencers = document.getElementById("form-input-influencers");
+    let form_input_influencers_list = form_input_influencers.value.split(",");
+    form_input_influencers_list = form_input_influencers_list.filter((value) => value !== influencer_id);
+    form_input_influencers.value = form_input_influencers_list.join(",");
+
+    console.log(form_input_influencers.value)
+
     CART.delete(influencer_id);
 
     updateCart();
 }
+
+
 
