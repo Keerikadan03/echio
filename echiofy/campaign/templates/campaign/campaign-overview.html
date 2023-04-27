@@ -11,14 +11,12 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Gruppo&family=Open+Sans&display=swap');
   </style>
-<nav class="nav-light bg-light d-flex justify-content-between" style="align-items: center;">
-    
-    <h2 class="text-uppercase text-center mb-5" style="color: #05BFDB; font-family: 'Gruppo', cursive; font-weight: 900;transform: translate(25%,50%);">{{ campaign }}</h2>
 
-    <div class="buttons" style="margin-right: 20px;">
+    <div class="buttons d-flex" style="margin-right: 20px; justify-content: space-around; margin-top: 20px; margin-bottom: 20px;">
         <a href="{% url 'campaign-details-view' campaign.id %}" class="btn btn-primary" >Campaign details </a>
     
         <a href="{% url 'campaign-influencers-view' campaign.id %}" class="btn btn-primary"> View influencers</a>
+
+        <a href="{% url 'campaign-influencers-explore' campaign.id %}" class="btn btn-primary"> Explore more influencers </a>
     </div>
-</nav>
 {% endblock %}

@@ -34,3 +34,15 @@ class Influencer(models.Model):
     def user(self):
         return UserProfile.objects.get(influencer=self)
 
+    @property
+    def first_name(self):
+        return self.user.first_name
+
+    @property
+    def last_name(self):
+        return self.user.last_name
+
+    @property
+    def email(self):
+        return self.user.email
+

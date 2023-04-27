@@ -8,5 +8,17 @@
 
 {% block content %}
     <a href="{% url 'campaign-overview' campaign.id %}"> Back to Campaign Overview </a>
+    <br>
+    <a href="{% url 'campaign-influencers-explore' campaign.id %}"> Explore more influencers </a>
+
     Here you can view the influencers in your campaign.
+
+    {% for influencer in influencers %}
+        <br>
+        {{ influencer.first_name }} {{ influencer.last_name }}
+        <br>
+        {{ influencer.email }}
+        <br>
+    {% endfor %}
+
 {% endblock %}

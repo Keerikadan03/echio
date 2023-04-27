@@ -9,17 +9,44 @@
 {% block content %}
     explore influencers
 
+    You are exploring influencers for campaign {{ campaign.name }}
+
+    <script src="{% static 'campaign/js/explore-influencers.js' %}"></script>
+
+    <input type="checkbox" id="checkbox-hide-added" onclick="toggleHideAddedInfluencers()" checked> Hide Influencers Already Added
+
+    <div id="cart">
+        <h3>Cart</h3>
+        <div id="cart-items">
+
+        </div>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.influencers }}
+            <button type="submit" class="btn btn-primary">Confirm</button>
+        </form>
+    </div>
+
     {% for influencer in influencers %}
-        <div class="card">
+        <div class="card" id="influencer-card-{{ influencer.id }}">
             <div class="card-body">
-                <h5 class="card-title">{{ influencer.user.first_name }} {{ influencer.user.last_name }}</h5>
-                <p class="card-text">Average Views: {{ influencer.avg_views }}</p>
-                <p class="card-text">Average Likes: {{ influencer.avg_likes }}</p>
-                <p class="card-text">Average Comments: {{ influencer.avg_comments }}</p>
-                <p class="card-text">Followers: {{ influencer.followers }}</p>
+                <h5 class="card-title influencer-name">{{ influencer.user.first_name }} {{ influencer.user.last_name }}</h5>
+                <p class="card-text influencer-views">Average Views: {{ influencer.avg_views }}</p>
+                <p class="card-text influencer-likes">Average Likes: {{ influencer.avg_likes }}</p>
+                <p class="card-text influencer-comments">Average Comments: {{ influencer.avg_comments }}</p>
+                <p class="card-text influencer-followers">Followers: {{ influencer.followers }}</p>
                 <a href="{% url 'influencer-landing' influencer.id %}" class="btn btn-primary">View Profile</a>
+
+                {% if influencer in influencers_added %}
+                    Already added
+                {% else %}
+                    <button class="btn btn-primary cart-add" onclick="addInfluencer({{ influencer.id }})">Add to Cart</button>
+                    <button class="btn btn-primary cart-remove" onclick="removeInfluencer({{ influencer.id }})" style="display: none;">Remove from Cart</button>
+                {% endif %}
             </div>
         </div>
     {% endfor %}
+
+    <script>updateCart();</script>
 
 {% endblock %}

@@ -146,7 +146,8 @@ def campaign_influencers_view(request, id : int):
         messages.error(request, f'You do not have access to this campaign')
         return render(request, 'not-allowed.html', context)
 
-    influencers = campaign.influencers
+    influencers = campaign.influencers.all()
+    print(influencers)
     context['influencers'] = influencers
 
     return render(request, TEMPLATE_CAMPAIGN_VIEW_INFLUENCERS, context)
@@ -168,6 +169,43 @@ def campaign_influencers_explore(request, id : int):
     if campaign not in request.user.campaigns:
         messages.error(request, f'You do not have access to this campaign')
         return render(request, 'not-allowed.html', context)
+
+
+    if request.method == 'POST':
+        form = CampaignAddInfluencersForm(request.POST)
+
+        if not form.is_valid():
+            messages.error(request, f'Bad payload')
+            return redirect('campaign-overview', id=campaign.id)
+
+        influencer_ids = form.cleaned_data['influencers']
+        influencer_ids = influencer_ids.split(',')
+        influencer_ids = list(map(int, influencer_ids))
+
+        if len(influencer_ids) == 0:
+            messages.error(request, f'No influencers were selected')
+            return redirect('campaign-overview', id=campaign.id)
+
+        influencers = []
+        for influencer_id in influencer_ids:
+            influencer = Influencer.objects.filter(id=influencer_id).first()
+            if influencer is None:
+                messages.error(request, f'Bad paylod.')
+                return redirect('campaign-overview', id=campaign.id)
+            influencers.append(influencer)
+
+        n_influencers = 0
+        for influencer in influencers:
+            if influencer in campaign.influencers.all():
+                continue
+            campaign.influencers.add(influencer)
+            n_influencers += 1
+
+        messages.success(request, f'{n_influencers} influencers were added to your campaign')
+        return redirect('campaign-overview', id=campaign.id)
+
+    form = CampaignAddInfluencersForm()
+    context['form'] = form
 
     # todo: params support
 
