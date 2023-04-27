@@ -1,4 +1,6 @@
 {% load sass_tags %}
+{% load static %}
+
 <link rel="stylesheet" href="{% sass_src 'base/css/navbar.scss' %}">
 
 <section id="title-main">
@@ -8,7 +10,7 @@
         <!--NAVBAR-->
 
         <nav class="navbar navbar-expand-lg navbar-dark" >
-            <a class="navbar-brand" href="/"><img src="../../assets/echio-removebg-preview.png" alt="logo"></a>
+            <a class="navbar-brand" href="/"><img src="../static/base/echio-removebg-preview.png" alt="logo" width="50px"></a>
             <button
                 class="navbar-toggler"
                 type="button"

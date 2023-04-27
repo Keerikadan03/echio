@@ -2,16 +2,23 @@
 
 {% load static %}
 
+  
 {% block title %}
     Campaign Overview
 {% endblock %}
 
 {% block content %}
-    {{ campaign }}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Gruppo&family=Open+Sans&display=swap');
+  </style>
+<nav class="nav-light bg-light d-flex justify-content-between" style="align-items: center;">
+    
+    <h2 class="text-uppercase text-center mb-5" style="color: #05BFDB; font-family: 'Gruppo', cursive; font-weight: 900;transform: translate(25%,50%);">{{ campaign }}</h2>
 
-
-    <a href="{% url 'campaign-details-view' campaign.id %}"> View campaign details </a>
-
-    <a href="{% url 'campaign-influencers-view' campaign.id %}"> View influencers in the campaign </a>
-
+    <div class="buttons" style="margin-right: 20px;">
+        <a href="{% url 'campaign-details-view' campaign.id %}" class="btn btn-primary" >Campaign details </a>
+    
+        <a href="{% url 'campaign-influencers-view' campaign.id %}" class="btn btn-primary"> View influencers</a>
+    </div>
+</nav>
 {% endblock %}
