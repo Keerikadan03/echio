@@ -1,22 +1,81 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1> Campaign Details </h1>
-
-    Client can view the details for the campaign and also edit them.
-
-    <a href="{% url 'campaigns' %}"> Back to Campaigns </a>
-
-    <p> Campaign Name: {{ campaign.name }} </p>
-    <p> Campaign Description: {{ campaign.description }} </p>
-
-    Campaign Primary Objective: {{ campaign.primary_objective }}
-    Campaign Brand: {{ campaign.brand }}
-    Campaign Payment Type: {{ campaign.payment_type }}
-    Campaign Budget: {{ campaign.budget }}
-    Campaign Payment Delay Days: {{ campaign.payement_delay_days }}
-    Campaign Tentative Payout: {{ campaign.tentative_payout }}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gruppo&family=Open+Sans&display=swap');
+      </style>
 
 
+    <a href="{% url 'campaigns' %}" style="color: black; margin-left: 2rem">&lt;  Back to Campaigns </a>
+
+    <section class="mb-5 mt-5">
+        <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+          <div class="container h-100 ">
+            <div class="row d-flex justify-content-center align-items-center">
+              <div class="col-12 col-md-10 col-lg-9 col-xl-8">
+                <div class="card" style="border-radius: 15px">
+                  <div class="card-body p-5">
+                    <h2 class="text-uppercase text-center mb-5" style="color: #05BFDB; font-family: 'Gruppo', cursive; font-weight: 900;">Campaign Details</h2>
+      
+                    <form method="post">
+                      {% csrf_token %}
+      
+                      <div class="mb-3">
+                        <span class="col-md-12 col-sm-12"
+                          ><strong> Campaign Name:</strong>
+                        </span>
+                        <span class="mt-2">{{ campaign.name }}</span>
+                      </div>
+      
+                      <div class="mb-3">
+                        <span class="col-md-12 col-sm-12"
+                          ><strong> Campaign Description:</strong>
+                        </span>
+                        <span class="mt-2"> {{ campaign.description }} </span>
+                      </div>
+      
+                      <div class="mb-3">
+                        <span class="col-md-12 col-sm-12"
+                          ><strong> Campaign Primary Objective:</strong>
+                        </span>
+                        <span class="mt-2">{{ campaign.payment_type }}</span>
+                      </div>
+      
+                      <div class="mb-3">
+                        <span class="col-md-12 col-sm-12"
+                          ><strong> Campaign Budget:</strong>
+                        </span>
+                        <span class="mt-2">{{ campaign.budget }}</span>
+                      </div>
+      
+                      <div class="mb-3">
+                        <span class="col-md-12 col-sm-12"
+                          ><strong> Campaign Payment Delay Days:</strong>
+                        </span>
+                        <span class="mt-2">{{ campaign.payement_delay_days }}</span>
+                      </div>
+      
+                      <div class="mb-3">
+                        <span class="col-md-12 col-sm-12"
+                          ><strong> Campaign Tentative Payout:</strong> 
+                        </span>
+                        <span class="mt-2">{{ campaign.tentative_payout }}</span>
+                      </div>
+
+                      <div class="mb-3 mt-4 col-sm-4">
+                        <input
+                          class="btn btn-primary btn-block col-sm-4"
+                          value="Edit"
+                        />
+                      </div>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
 {% endblock %}
