@@ -7,11 +7,15 @@
 {% endblock %}
 
 {% block content %}
-    {{ campaign }}
-
 
     <a href="{% url 'campaign-details-view' campaign.id %}"> View campaign details </a>
 
+    <br>
+
     <a href="{% url 'campaign-influencers-view' campaign.id %}"> View influencers in the campaign </a>
+
+    <br>
+
+    <a href="{% url 'campaign-influencers-explore' campaign.id %}"> Explore more influencers </a>
 
 {% endblock %}

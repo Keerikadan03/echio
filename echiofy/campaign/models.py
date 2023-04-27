@@ -1,6 +1,7 @@
 from django.db import models
 from enum import Enum
 
+
 class PrimaryObjectiveEnum(str, Enum):
     CONTENT_CREATION = 'Content Creation'
     REACH = 'Reach'
@@ -17,11 +18,6 @@ class PaymentTypeEnum(str, Enum):
         return self.value
 
 
-class CampaignInfluencers(models.Model):
-    campaign = models.ForeignKey('Campaign', on_delete=models.CASCADE)
-    influencer = models.ForeignKey('user.Influencer', on_delete=models.CASCADE)
-
-    objects = models.Manager()
 
 class Campaign(models.Model):
     owner_user = models.ForeignKey('user.UserProfile', on_delete=models.CASCADE)
@@ -33,10 +29,7 @@ class Campaign(models.Model):
     budget = models.IntegerField()
     payment_delay_days = models.IntegerField()
     tentative_payout = models.IntegerField()
-
-    @property
-    def influencers(self):
-        return CampaignInfluencers.objects.filter(campaign=self)
+    influencers = models.ManyToManyField('user.Influencer', blank=True, default=None)
 
     objects = models.Manager()
 

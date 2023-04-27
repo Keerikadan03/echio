@@ -146,7 +146,8 @@ def campaign_influencers_view(request, id : int):
         messages.error(request, f'You do not have access to this campaign')
         return render(request, 'not-allowed.html', context)
 
-    influencers = campaign.influencers
+    influencers = campaign.influencers.all()
+    print(influencers)
     context['influencers'] = influencers
 
     return render(request, TEMPLATE_CAMPAIGN_VIEW_INFLUENCERS, context)
@@ -170,10 +171,7 @@ def campaign_influencers_explore(request, id : int):
         return render(request, 'not-allowed.html', context)
 
 
-    print("BBBBBBBBBBBBB")
-
     if request.method == 'POST':
-        print("AAAAAAAAAAAAAAAAAAAAAA")
         form = CampaignAddInfluencersForm(request.POST)
 
         if not form.is_valid():
@@ -198,9 +196,9 @@ def campaign_influencers_explore(request, id : int):
 
         n_influencers = 0
         for influencer in influencers:
-            if CampaignInfluencers.objects.filter(campaign=campaign, influencer=influencer).exists():
+            if influencer in campaign.influencers.all():
                 continue
-            CampaignInfluencers.objects.create(campaign=campaign, influencer=influencer)
+            campaign.influencers.add(influencer)
             n_influencers += 1
 
         messages.success(request, f'{n_influencers} influencers were added to your campaign')
