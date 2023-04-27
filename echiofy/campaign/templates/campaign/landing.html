@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Campaign Landing Page
+{% endblock %}
+
+{% block content %}
+    campaign landing page
+
+    {% if campaign.owner_user == request.user %}
+        <a href="{% url 'campaign-overview' campaign.id %}">Overview</a>
+    {% endif %}
+
+    {{ campaign.name }}
+    {{ campaign.description }}
+    {{ campaign.primary_objective }}
+    {{ campaign.payment_type }}
+    {{ campaign.budget }}
+    {{ campaign.payment_delay_days }}
+    {{ campaign.tentative_payout }}
+
+{% endblock %}
