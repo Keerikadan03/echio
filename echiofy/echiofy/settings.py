@@ -102,6 +102,7 @@ ECHIO_MYSQL_HOST = os.environ.get('ECHIO_MYSQL_HOST')
 ECHIO_MYSQL_USER = os.environ.get('ECHIO_MYSQL_USER')
 ECHIO_MYSQL_PASS = os.environ.get('ECHIO_MYSQL_PASS')
 ECHIO_MYSQL_DB = os.environ.get('ECHIO_MYSQL_DB')
+ECHIO_MYSQL_PORT = os.environ.get('ECHIO_MYSQL_PORT')
 
 DATABASES = {
     'default': {
@@ -110,6 +111,7 @@ DATABASES = {
         'USER': ECHIO_MYSQL_USER,
         'PASSWORD': ECHIO_MYSQL_PASS,
         'HOST': ECHIO_MYSQL_HOST,
+        'PORT': ECHIO_MYSQL_PORT,
     }
 }
 
