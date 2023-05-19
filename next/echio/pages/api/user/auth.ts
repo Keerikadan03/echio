@@ -1,13 +1,24 @@
-import prisma from '../../../prisma/client'
+import type { NextApiRequest, NextApiResponse } from 'next'
 import jwt from 'jsonwebtoken'
+import prisma from '../../../prisma/client'
+import { serialize } from 'cookie'
 
-// return a jwt token
-export default async function handler(req: any, res: any) {
+
+type Data = {
+}
+
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<Data>
+) {
+
   switch (req.method) {
 
     case 'GET':
 
-      const user = await prisma.user.findUnique({ where: { email: req.query.email, } })
+      if (!(typeof req.query.email === 'string')) return res.status(400).json({ message: 'Invalid query' })
+      const user = await prisma.user.findUnique({ where: { email: req.query.email } })
 
       if (!user || user.password !== req.query.password) {
         return res.status(404).json({ message: 'Email and password not match' })
@@ -16,7 +27,8 @@ export default async function handler(req: any, res: any) {
       // @ts-ignore
       const token = jwt.sign(user.id, process.env.JWT_SECRET)
 
-      return res.status(200).json({ token: token })
+      res.setHeader('Set-Cookie', serialize('token', token, { path: '/', httpOnly: true, sameSite: 'strict'}))
+      res.status(200).json({ message: 'Login success'})
 
     default:
       res.status(400).json({ message: 'That method is not supported.' })

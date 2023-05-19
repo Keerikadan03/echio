@@ -1,13 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import jwt from 'jsonwebtoken'
 import prisma from '../../../prisma/client'
-import { User } from '@prisma/client'
+import { Campaign } from '@prisma/client'
 
 
 type Data = {
-  user: User
+  campaigns: Campaign[],
 } | {
-  message: string
+  message: string,
+  error?: any,
 }
 
 
@@ -28,7 +29,12 @@ export default async function handler(
   switch (req.method) {
 
     case 'GET':
-      return res.status(200).json({ user: user })
+      const campaigns = await prisma.campaign.findMany({ where: {
+          owner_id: user.id,
+        }
+      })
+
+      return res.status(200).json({ campaigns: campaigns })
 
     default:
       res.status(400).json({ message: 'That method is not supported.' })

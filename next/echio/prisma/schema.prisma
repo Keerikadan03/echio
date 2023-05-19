@@ -16,3 +16,11 @@ model User {
   email String @unique
   password String
 }
+
+model Campaign {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  owner_id String
+  name String
+  description String
+  image String?
+  }

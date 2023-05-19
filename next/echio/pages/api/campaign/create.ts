@@ -1,13 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import jwt from 'jsonwebtoken'
 import prisma from '../../../prisma/client'
-import { User } from '@prisma/client'
+import { Campaign } from '@prisma/client'
 
 
 type Data = {
-  user: User
+  message: string,
+  error?: any,
 } | {
-  message: string
+  message: string,
+  campaign: Campaign,
 }
 
 
@@ -27,8 +29,24 @@ export default async function handler(
 
   switch (req.method) {
 
-    case 'GET':
-      return res.status(200).json({ user: user })
+    case 'POST':
+      const { name, description, image} = req.body
+
+      try {
+        const campaign = await prisma.campaign.create({
+          data: {
+            owner_id: user.id,
+            name: name,
+            description: description,
+            image: image,
+          },
+        })
+
+        return res.status(201).json({ message: 'Campaign created.', campaign: campaign })
+
+      } catch (error) {
+        return res.status(400).json({ message: 'Something went wrong.', error: error })
+      }
 
     default:
       res.status(400).json({ message: 'That method is not supported.' })
