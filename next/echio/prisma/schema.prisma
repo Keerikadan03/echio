@@ -19,7 +19,7 @@ model User {
 
 model Campaign {
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  owner_id String
+  owner_id String @db.ObjectId
   name String
   description String
   image String?
@@ -28,7 +28,7 @@ model Campaign {
 
 model Influencer {
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  user_id String @unique
+  user_id String @unique @db.ObjectId
   followers Int
   avg_likes Int
   avg_comments Int
@@ -36,15 +36,15 @@ model Influencer {
 
 model CampaignInfluencerPending {
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  campaign_id String
-  influencer_id String
+  campaign_id String @db.ObjectId
+  influencer_id String @db.ObjectId
   @@unique([campaign_id, influencer_id])
   }
 
 model CampaignInfluencerAccepted {
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  campaign_id String
-  influencer_id String
+  campaign_id String @db.ObjectId
+  influencer_id String @db.ObjectId
   @@unique([campaign_id, influencer_id])
   }
 
