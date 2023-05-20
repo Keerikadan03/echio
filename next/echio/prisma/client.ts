@@ -12,7 +12,14 @@ interface CustomNodeJsGlobal extends NodeJS.Global {
 
 declare const global : CustomNodeJsGlobal
 
-const prisma = global.prisma || new PrismaClient()
+const prisma = global.prisma || (() => {
+
+  console.log('Creating new PrismaClient instance.');
+  let _prisma = new PrismaClient()
+  console.log('PrismaClient instance created.');
+  return _prisma
+
+})()
 
 if (process.env.NODE_ENV === 'development') global.prisma = prisma
 

@@ -23,4 +23,28 @@ model Campaign {
   name String
   description String
   image String?
+  @@unique([owner_id, name])
   }
+
+model Influencer {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  user_id String @unique
+  followers Int
+  avg_likes Int
+  avg_comments Int
+  }
+
+model CampaignInfluencerPending {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  campaign_id String
+  influencer_id String
+  @@unique([campaign_id, influencer_id])
+  }
+
+model CampaignInfluencerAccepted {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  campaign_id String
+  influencer_id String
+  @@unique([campaign_id, influencer_id])
+  }
+
