@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import jwt from 'jsonwebtoken'
-import prisma from '../../../prisma/client'
-import { Campaign } from '@prisma/client'
+import create_campaign from '@/lib/campaigns/create'
+import auth from '@/lib/auth'
 
 
 type Data = {
@@ -18,14 +17,8 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
 
-  if (!req.cookies.token) return res.status(401).json({ message: 'Not authenticated.' })
-  const token = req.cookies.token
-  // @ts-ignore
-  const id = jwt.verify(token, process.env.JWT_SECRET)
-
-  if (!id) return res.status(401).json({ message: 'Not authenticated.' })
-  const user = await prisma.user.findUnique({ where: { id: id } })
-  if (!user) return res.status(401).json({ message: 'Not authenticated.' })
+  const user = await auth(req)
+  if (!user) return res.status(401).json({ message: 'Unauthenticated' })
 
   switch (req.method) {
 
@@ -33,15 +26,7 @@ export default async function handler(
       const { name, description, image} = req.body
 
       try {
-        const campaign = await prisma.campaign.create({
-          data: {
-            owner_id: user.id,
-            name: name,
-            description: description,
-            image: image,
-          },
-        })
-
+        const campaign = await create_campaign(user.id, name, description, image)
         return res.status(201).json({ message: 'Campaign created.', campaign: campaign })
 
       } catch (error) {

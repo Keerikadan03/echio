@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import jwt from 'jsonwebtoken'
-import prisma from '../../../prisma/client'
-import { Prisma, Campaign, Influencer } from '@prisma/client'
+import prisma from '@/prisma/client'
+import auth from '@/lib/auth'
 
 
 type Data = {
@@ -18,14 +17,8 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
 
-  if (!req.cookies.token) return res.status(401).json({ message: 'Not authenticated.' })
-  const token = req.cookies.token
-  // @ts-ignore
-  const id = jwt.verify(token, process.env.JWT_SECRET)
-
-  if (!id) return res.status(401).json({ message: 'Not authenticated.' })
-  const user = await prisma.user.findUnique({ where: { id: id } })
-  if (!user) return res.status(401).json({ message: 'Not authenticated.' })
+  const user = auth(req)
+  if (!user) return res.status(401).json({message: 'Unauthenticated'})
 
   switch (req.method) {
 
