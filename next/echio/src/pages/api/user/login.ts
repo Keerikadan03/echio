@@ -15,12 +15,14 @@ export default async function handler(
 
   switch (req.method) {
 
-    case 'GET':
+    case 'POST':
 
-      if (!(typeof req.query.email === 'string')) return res.status(400).json({ message: 'Invalid query' })
-      const user = await prisma.user.findUnique({ where: { email: req.query.email } })
+      const { email, password } = req.body
 
-      if (!user || user.password !== req.query.password) {
+      if (!(typeof email === 'string')) return res.status(400).json({ message: 'Invalid query' })
+      const user = await prisma.user.findUnique({ where: { email: email } })
+
+      if (!user || user.password !== password) {
         return res.status(404).json({ message: 'Email and password not match' })
       }
 
@@ -29,6 +31,8 @@ export default async function handler(
 
       res.setHeader('Set-Cookie', serialize('token', token, { path: '/', httpOnly: true, sameSite: 'strict'}))
       res.status(200).json({ message: 'Login success'})
+
+      break
 
     default:
       res.status(400).json({ message: 'That method is not supported.' })

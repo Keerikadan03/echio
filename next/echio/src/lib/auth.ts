@@ -1,6 +1,6 @@
 import prisma from "@/prisma/client";
 import { NextApiRequest } from "next";
-import jwt from "jsonwebtoken";
+import jwt, { JsonWebTokenError } from "jsonwebtoken";
 
 
 /**
@@ -12,13 +12,19 @@ export default async function auth(
 
   if (!req.cookies.token) return null
   const token = req.cookies.token
-  // @ts-ignore
-  const id = jwt.verify(token, process.env.JWT_SECRET)
+  try {
+    // @ts-ignore
+    const id = jwt.verify(token, process.env.JWT_SECRET)
 
-  if (!id) return null
-  const user : User = await prisma.user.findUnique({ where: { id: id } })
-  if (!user) return null
+    if (!id) return null
+    const user = await prisma.user.findUnique({ where: { id: id } })
+    if (!user) return null
 
-  return user
+    return user
+
+  } catch (e) {
+    if (e instanceof JsonWebTokenError) return null
+  }
+
 
 }
