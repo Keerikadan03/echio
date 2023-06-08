@@ -17,12 +17,22 @@ model User {
   password String
 }
 
+enum CampaignType {
+  BARTER
+  PAID
+  NORMAL
+}
+
 model Campaign {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   owner_id String @db.ObjectId
   name String
   description String
   image String?
+  product_media String[] @default([])
+  product_description String @default("")
+  campaign_type CampaignType @default(NORMAL)
+  nsfw Boolean @default(false)
   @@unique([owner_id, name])
   }
 

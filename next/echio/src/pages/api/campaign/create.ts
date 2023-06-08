@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import create_campaign from '@/lib/campaigns/create'
 import auth from '@/lib/auth'
+import { parseBool } from '@/lib/utils'
 
 
 type Data = {
@@ -23,10 +24,31 @@ export default async function handler(
   switch (req.method) {
 
     case 'POST':
-      const { name, description, image} = req.body
+      let { name, description, image, product_media, product_description, campaign_type, nsfw } = req.body
 
       try {
-        const campaign = await create_campaign(user.id, name, description, image)
+        nsfw = parseBool(nsfw)
+        product_media = product_media.split(',')
+        switch (campaign_type) {
+          case 'PAID':
+          case 'BARTER':
+          case 'NORMAL':
+            break
+          case undefined:
+            campaign_type = 'NORMAL'
+          default:
+            throw 'Invalid campaign type.'
+        }
+        const campaign = await create_campaign({
+          owner_id: user.id,
+          name: name,
+          description: description,
+          image: image,
+          campaign_type: campaign_type,
+          nsfw: nsfw,
+          product_media: product_media,
+          product_description: product_description
+        })
         return res.status(201).json({ message: 'Campaign created.', campaign: campaign })
 
       } catch (error) {

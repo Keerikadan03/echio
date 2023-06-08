@@ -26,7 +26,7 @@ export default async function handler(
       return res.status(200).json({ campaigns: campaigns })
 
     default:
-      res.status(400).json({ message: 'That method is not supported.' })
+      res.status(405).json({ message: 'That method is not supported.' })
 
   }
 }
