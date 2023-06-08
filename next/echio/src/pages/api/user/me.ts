@@ -23,7 +23,7 @@ export default async function handler(
       return res.status(200).json({ user: user })
 
     default:
-      res.status(400).json({ message: 'That method is not supported.' })
+      res.status(405).json({ message: 'That method is not supported.' })
 
   }
 }
