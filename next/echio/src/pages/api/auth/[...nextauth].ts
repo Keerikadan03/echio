@@ -15,15 +15,15 @@ export const authOptions : NextAuthOptions = {
     GithubProvider({
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    })
+    }),
   ],
-  // pages: {
-  //   signIn: "/signin",
-  //   signOut: "/signout",
-  //   error: "/signin",
-  //   verifyRequest: "/verify-request",
-  //   newUser: undefined
-  // }
+  pages: {
+    signIn: "/signin",
+    signOut: "/signout",
+    error: "/signin",
+    verifyRequest: "/verify-request",
+    newUser: undefined
+  }
 }
 
 export default NextAuth(authOptions)
