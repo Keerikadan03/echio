@@ -1,36 +1,25 @@
-import prisma from "@/prisma/client"
+import z from "zod"
+import { Campaigns } from "../db/models"
+import { ObjectId } from "mongodb"
+import { isValidObjectId } from "mongoose"
 
-export default async function create_campaign({
-  owner_id,
-  name,
-  description,
-  product_media,
-  product_description,
-  image,
-  campaign_type,
-  nsfw
-}: {
-  owner_id: string
-  name: string
-  description: string
-  product_media: string[]
-  product_description: string
-  image?: string
-  campaign_type?: string
-  nsfw?: boolean
-}): Promise<Campaign> {
-  const campaign = await prisma.campaign.create({
-    data: {
-      owner_id: owner_id,
-      name: name,
-      description: description,
-      image: image,
-      campaign_type: campaign_type,
-      nsfw: nsfw,
-      product_media: product_media,
-      product_description: product_description
-    }
-  })
+const CampaignZodSchema = z.object({
+  owner_id: z.any().refine(isValidObjectId).transform((val) => new ObjectId(val)),
+  name: z.string(),
+  description: z.string(),
+  image: z.string().url(),
+  product_description: z.string(),
+  product_media: z.array(z.string().url()),
+  campaign_type: z.enum(["NORMAL", "PAID", "BARTER"]).default("NORMAL"),
+  nsfw: z.boolean().default(false)
+})
+
+export default async function create_campaign(props: any) {
+
+  const campaign_input = CampaignZodSchema.parse(props)
+  const campaign = new Campaigns(campaign_input)
+  await campaign.save()
 
   return campaign
+
 }

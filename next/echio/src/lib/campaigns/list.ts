@@ -1,9 +1,17 @@
-import prisma from "@/prisma/client"
+import { ObjectId } from "mongodb"
+import { isValidObjectId } from "mongoose"
+import { z } from "zod"
+import { Campaigns } from "../db/models"
 
 
-export default async function list_user_campaigns(
-  user_id: string
-) : Promise<Campaign[]> {
-    const campaigns : Campaign[] = await prisma.campaign.findMany({ where: { owner_id: user_id, } })
-    return campaigns
+const schema = z.any().refine(isValidObjectId).transform((val) => new ObjectId(val))
+
+
+export default async function list_user_campaigns(user_id: any) {
+
+  const _user_id = schema.parse(user_id)
+
+  const campaigns = await Campaigns.find({ owner_id: _user_id })
+  return campaigns
+
 }

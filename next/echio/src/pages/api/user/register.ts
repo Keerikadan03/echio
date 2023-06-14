@@ -1,4 +1,5 @@
-import prisma from "@/prisma/client"
+import { createUserByCredentials } from '@/lib/db/user'
+import prisma from '../../../lib/prisma'
 
 
 export default async function handler(req: any, res: any) {
@@ -8,15 +9,8 @@ export default async function handler(req: any, res: any) {
     case 'POST':
 
       try {
-        await prisma.user.create({
-          data: {
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password,
-          },
-        })
-
-        res.status(200).json({ message: 'User created successfully' })
+        await createUserByCredentials(req.body.email, req.body.password, req.body.name)
+        res.status(200).json({ message: 'User created successfully.' })
 
       } catch (error) {
         res.status(400).json({ message: 'Something went wrong.', error: error })

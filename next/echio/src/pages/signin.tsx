@@ -3,12 +3,12 @@
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
 import { Context } from "@/types"
 import { InferGetServerSidePropsType } from "next"
+import { getServerSession } from "next-auth"
 import { getCsrfToken, signIn } from "next-auth/react"
 import { getProviders } from "next-auth/react"
-import { getServerSession } from "next-auth"
+import { useRouter } from "next/router"
 
-
-export async function getServerSideProps(ctx : Context) {
+export async function getServerSideProps(ctx: Context) {
   const session = await getServerSession(ctx.req, ctx.res, authOptions)
 
   if (session) {
@@ -25,27 +25,48 @@ export async function getServerSideProps(ctx : Context) {
 
   return {
     props: {
-        providers: providers,
-        session: session,
-        csrfToken: csrfToken
-      }
+      providers: providers,
+      csrfToken: csrfToken,
+    }
   }
 }
 
-export default function Page({ providers, csrfToken, ...props } : InferGetServerSidePropsType<typeof getServerSideProps>) {
-  return (
-    <div>
-      <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-      <h1>Sign In</h1>
-            {providers &&
-              Object.values(providers).map(provider => (
-                <div key={provider.name} style={{ marginBottom: 0 }}>
-                  <button onClick={() => signIn(provider.id)} >
-                    Sign in with{' '} {provider.name}
-                  </button>
-                </div>
-              ))}
+export default function Page({
+  providers,
+  csrfToken,
+  ...props
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
 
-    </div>
-  )
+  const router = useRouter()
+  let register = false
+  if (router.query.register == 'true') register = true
+
+
+    return (
+      <div>
+        <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+        <h1>Sign In</h1>
+        {providers &&
+          Object.values(providers)
+            .filter((provider) => provider.id != "credentials")
+            .map((provider) => (
+              <div key={provider.name} style={{ marginBottom: 0 }}>
+                <button onClick={() => signIn(provider.id)}>Sign in with {provider.name}</button>
+              </div>
+            ))}
+
+        <form method="post" action="/api/auth/callback/credentials">
+          <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+          <label>
+            Email
+            <input name="email" type="text" />
+          </label>
+          <label>
+            Password
+            <input name="password" type="password" />
+          </label>
+          <button type="submit">Sign in</button>
+        </form>
+      </div>
+    )
 }
