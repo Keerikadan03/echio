@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import jwt from 'jsonwebtoken'
-import prisma from "@/prisma/client"
+import prisma from '@/lib/prisma'
 import { serialize } from 'cookie'
 
 
@@ -20,7 +20,7 @@ export default async function handler(
       const { email, password } = req.body
 
       if (!(typeof email === 'string')) return res.status(400).json({ message: 'Invalid query' })
-      const user = await prisma.user.findUnique({ where: { email: email } })
+      const user = await prisma.users.findUnique({ where: { email: email } })
 
       if (!user || user.password !== password) {
         return res.status(404).json({ message: 'Email and password not match' })

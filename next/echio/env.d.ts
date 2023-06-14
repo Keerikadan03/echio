@@ -13,6 +13,22 @@ declare global {
   }
 }
 
+import type { DefaultUser } from 'next-auth';
+
+declare module 'next-auth' {
+  interface Session {
+    user?: DefaultUser & {
+      id: string;
+    };
+  }
+}
+
+declare module 'next-auth/jwt/types' {
+  interface JWT {
+    uid: string;
+  }
+}
+
 // If this file has no import/export statements (i.e. is a script)
 // convert it into a module by adding an empty export statement.
 export {}
