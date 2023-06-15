@@ -1,9 +1,10 @@
 import { Context } from "@/types";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
-import { getCampaigns } from "@/lib/campaigns";
+import { getCampaigns } from "@/lib/db/campaigns";
 import { InferGetServerSidePropsType } from "next";
 import { campaigns } from "@prisma/client";
+import Link from "next/link";
 
 
 export async function getServerSideProps(ctx : Context) {
@@ -38,7 +39,9 @@ export default function Page({ session, campaigns }: InferGetServerSidePropsType
       Campaigns
       {campaigns.map((campaign: campaigns) => (
             <div key={campaign.id}>
+            <Link href={`/campaigns/${campaign.id}`}>
             <h1>{campaign.name}</h1>
+            </Link>
             <p>{campaign.description}</p>
             <p>{campaign.campaign_type}</p>
             <p>{campaign.image}</p>

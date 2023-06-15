@@ -81,13 +81,13 @@ export async function fillDatabase() {
     console.log(`Created campaign ${i + 1}`)
 
     for (let j = 1; j < n_shortlisted_influencers + n_ongoing_influencers; j++) {
-      await addInfluencerToCampaign(campaigns[i].id, influencers[j].id)
+      await addInfluencerToCampaign(influencers[j].id, campaigns[i].id)
       console.log(`Added influencer ${j + 1} to campaign ${i + 1}`)
     }
 
 
     for (let j = 1; j < n_shortlisted_influencers; j++) {
-      await shortlistInfluencer(campaigns[i].id, influencers[j].id)
+      await shortlistInfluencer(influencers[j].id, campaigns[i].id)
       console.log(`Shortlisted influencer ${j + 1} to campaign ${i + 1}`)
     }
   }
