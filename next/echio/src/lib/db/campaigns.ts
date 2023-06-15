@@ -1,5 +1,4 @@
-import { campaigns } from "@prisma/client"
-import prisma from "./prisma"
+import prisma from "@/lib/prisma"
 import { z } from "zod"
 import { isValidObjectId } from "mongoose"
 
@@ -11,6 +10,16 @@ export async function getCampaigns(user_id: string) {
   })
 
   return campaigns
+}
+
+export async function getCampaignById(campaign_id: string) {
+  const _campaign_id = z.string().refine(isValidObjectId).parse(campaign_id)
+  const campaign = await prisma.campaigns.findUnique({
+    where: {
+      id: _campaign_id
+    }})
+
+  return campaign
 }
 
 
@@ -25,7 +34,7 @@ const Campaign = z.object({
   nsfw: z.boolean()
 })
 
-export async function createCampaign(params: any) {
+export async function createCampaign(params: z.infer<typeof Campaign>) {
   const { owner_id, name, description, image, product_description, campaign_type, nsfw } = Campaign.parse(params)
   const campaign = await prisma.campaigns.create({
     data: {
@@ -41,3 +50,16 @@ export async function createCampaign(params: any) {
 
   return campaign
 }
+
+export async function getCampaignInfluencers(campaign_id: string) {
+  const _campaign_id = z.string().refine(isValidObjectId).parse(campaign_id)
+
+  const influencers = await prisma.campaign_influencers.findMany({
+    where: {
+      campaign_id: _campaign_id
+    }
+  })
+
+  return influencers
+}
+

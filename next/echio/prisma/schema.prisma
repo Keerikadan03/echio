@@ -43,3 +43,30 @@ model campaigns {
   nsfw Boolean @default(false)
   @@unique([owner_id, name])
 }
+
+model influencers {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  user_id String @db.ObjectId @unique
+  name String
+  reach Int
+  engagement Float
+  avg_likes Int
+  avg_views Int
+  rate Float
+  image String?
+  platform_youtube String?
+  platform_instagram String?
+}
+
+enum influencer_status {
+  ONGOING
+  SHORTLISTED
+}
+
+model campaign_influencers {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  campaign_id String @db.ObjectId
+  influencer_id String @db.ObjectId
+  status influencer_status @default(ONGOING)
+  @@unique([campaign_id, influencer_id])
+}

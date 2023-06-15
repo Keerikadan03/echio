@@ -40,8 +40,6 @@ export async function createUserByCredentials(email: string, password: string, n
       }
     )
 
-    console.log(user)
-
     return user
 }
 
