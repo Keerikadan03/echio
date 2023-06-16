@@ -2,8 +2,14 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../auth/[...nextauth]'
 import { Prisma } from '@prisma/client'
-import { createCampaign } from '@/lib/db/campaigns'
+import { z } from 'zod'
+import { isValidObjectId } from 'mongoose'
+import { addInfluencerToCampaign } from '@/lib/db/influencer'
 
+const input = z.object({
+  campaign_id: z.string().refine(isValidObjectId),
+  influencer_id: z.string().refine(isValidObjectId)
+})
 
 export default async function handler(
   req: NextApiRequest,
@@ -19,14 +25,11 @@ export default async function handler(
     case 'POST':
       try {
 
-        const data = {
-          owner_id: session.user.id,
-          ...req.body
-        }
+        const data = input.parse(req.body)
 
-        const campaign = await createCampaign(data)
+        await addInfluencerToCampaign(data.influencer_id, data.campaign_id)
 
-        return res.status(200).json({ message: 'Campaign created.', campaign })
+        return res.status(200).json({ message: 'Influencer added to campaign.' })
 
       } catch (e) {
         if (e instanceof Prisma.PrismaClientKnownRequestError) {
