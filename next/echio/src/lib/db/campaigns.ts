@@ -28,9 +28,9 @@ const Campaign = z.object({
   owner_id: z.string().refine(isValidObjectId),
   name: z.string(),
   description: z.string(),
-  image: z.string().url(),
+  image: z.string().url().optional(),
   product_description: z.string(),
-  product_media: z.array(z.string().url()),
+  product_media: z.array(z.string().url()).default([]),
   campaign_type: z.enum(['NORMAL', 'PAID', 'BARTER']),
   nsfw: z.boolean()
 })
@@ -54,7 +54,6 @@ export async function createCampaign(params: z.infer<typeof Campaign>) {
 
 export async function getCampaignInfluencers(campaign_id: string) {
   const _campaign_id = z.string().refine(isValidObjectId).parse(campaign_id)
-  console.log(_campaign_id)
 
   const influencers = await prisma.campaign_influencers.findMany({
     where: {

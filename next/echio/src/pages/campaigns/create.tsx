@@ -1,4 +1,3 @@
-import { createCampaign } from "@/lib/campaigns"
 import { Context } from "@/types"
 import { InferGetServerSidePropsType } from "next"
 import { getServerSession } from "next-auth"
@@ -17,18 +16,6 @@ export async function getServerSideProps(ctx: Context) {
     }
   }
 
-  if (ctx.req.method === "POST") {
-    const owner_id = session.user.id
-    const campaign = await createCampaign({ owner_id, ...ctx.req.body })
-
-    return {
-      redirect: {
-        destination: `/campaigns/${campaign.id}`,
-        permanent: false
-      }
-    }
-  }
-
   return {
     props: {
       session: session
@@ -37,5 +24,9 @@ export async function getServerSideProps(ctx: Context) {
 }
 
 export default function Page({ session }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  return <p>make form here</p>
+  return (
+    <div>
+    Make form
+    </div>
+  )
 }
