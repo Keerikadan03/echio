@@ -25,5 +25,6 @@ export async function getServerSideProps(ctx: Context) {
 export default function Page({campaign, influencers} : InferGetServerSidePropsType<typeof getServerSideProps>) {
   return <div>Campaign
     {JSON.stringify(campaign)}
+    {JSON.stringify(influencers)}
   </div>
 }
