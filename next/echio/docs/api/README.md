@@ -1,48 +1,101 @@
 # API DOCS
 
-## Index
+## User Authentication
 
-- [ /api/user/login ](#login)
-- [ /api/user/register ](#register)
-- [ /api/user/me ](#me)
-- [ /api/campaign/create](#create)
-- [ /api/campaign/list](#list)
+`next-auth` package is used to provide easy authentication.
 
-## user
+To check if a user is logged in, use the `getSession` function like such
 
-### me
+```javascript
+export default async function Page(props) {
+  const session = await getSession()
+  if (!session || session.status === "unauthenticated") {
+    return <div>Unauthenticated</div>
+  }
+  // ...
+}
+```
+
+refer the docs : https://next-auth.js.org/getting-started/client#getsession
+
+---
+
+For creating the login / register page use the following api routes:
+
+#### OAuth
+
+- Google: `/api/auth/signin/google`
+- Apple: TODO
+- Outlook: TODO
+
+#### Credentials
+
+Create a csrf token first and then use the api route below
 
 ```
-GET : /api/user/me
+POST : /api/auth/callback/credentials (for login)
 ```
 
-Get data for currently logged in user.
+refer docs for getCrsfToken() : https://next-auth.js.org/getting-started/client#getcsrftoken
 
 <details>
 
-#### Query Parameters
+#### Body Parameters
 
-(none)
-
-#### Response Codes
-
-| Code | Meaning                   | Data    |
-| ---- | ------------------------- | ------- |
-| 200  | Responding with user info | user    |
-| 401  | Unauthenticated           | message |
-| 405  | Method not supported      | message |
+| Parameter | Type       | Description                     |
+| --------- | ---------- | ------------------------------- |
+| csrfToken | csrf token | csrf token using getCsrfToken() |
+| email     | string     | email of existing user          |
+| password  | string     | password of existing user       |
 
 </details>
 
+<br>
+
+```
+POST : /api/user/register (for register)
+```
+
+<details>
+
+#### Body Parameters
+
+| Parameter | Type       | Description                     |
+| --------- | ---------- | ------------------------------- |
+| csrfToken | csrf token | csrf token using getCsrfToken() |
+| email     | string     | email of new user               |
+| password  | string     | password of new user            |
+| name      | string     | name of new user                |
+
+TODO: more details of user
+
+</details>
+
+### me
+
+Get data for currently logged in user. (not recommended, use getSession() as shown above)
+
+```
+GET : /api/auth/session
+```
+
 ## campaign
 
-### create
+### get campaigns
+
+```js
+await getCampaigns(user_id)
+```
+
+| Parameter | Type   | Description                   |
+| --------- | ------ | ----------------------------- |
+| user_id   | string | user id ( `session.user.id` ) |
+
+### Create campaign.
 
 ```
 POST : /api/campaign/create
 ```
-
-Create a campaign.
 
 <details>
 
@@ -60,33 +113,61 @@ Create a campaign.
 
 #### Response Codes
 
-| Code | Meaning                                       | Data              |
-| ---- | --------------------------------------------- | ----------------- |
-| 201  | Campaign created successfully                 | message, campaign |
-| 400  | Something went wrong (probably existing user) | message, error?   |
-| 405  | Method not supported                          | message           |
+| Code | Meaning                                           | Data              |
+| ---- | ------------------------------------------------- | ----------------- |
+| 201  | Campaign created successfully                     | message, campaign |
+| 400  | Something went wrong (probably existing campaign) | message, error?   |
+| 405  | Method not supported                              | message           |
 
 </details>
 
-### list
+### add influencer to ongoing list
 
 ```
-GET : /api/campaign/list
+POST : /api/campaign/add-influencer
 ```
-
-List campaigns for the uesr.
 
 <details>
 
-#### Query Parameters
+#### Body Parameters (json)
 
-(none)
+| Parameter     | Type   | Description |
+| ------------- | ------ | ----------- |
+| campaign_id   | string | campaign id |
+| influencer_id | string | campaign_id |
 
 #### Response Codes
 
-| Code | Meaning                           | Data      |
-| ---- | --------------------------------- | --------- |
-| 200  | Responding with list of campaigns | campaigns |
-| 405  | Method not supported              | message   |
+| Code | Meaning                       | Data              |
+| ---- | ----------------------------- | ----------------- |
+| 201  | Influencer added successfully | message, campaign |
+| 400  | Something went wrong          | message, error?   |
+| 405  | Method not supported          | message           |
+
+</details>
+
+
+### add influencer to shortlisted list
+
+```
+POST : /api/campaign/shortlist-influencer
+```
+
+<details>
+
+#### Body Parameters (json)
+
+| Parameter     | Type   | Description |
+| ------------- | ------ | ----------- |
+| campaign_id   | string | campaign id |
+| influencer_id | string | campaign_id |
+
+#### Response Codes
+
+| Code | Meaning                       | Data              |
+| ---- | ----------------------------- | ----------------- |
+| 201  | Influencer added successfully | message, campaign |
+| 400  | Something went wrong          | message, error?   |
+| 405  | Method not supported          | message           |
 
 </details>

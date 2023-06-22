@@ -1,7 +1,6 @@
 import prisma from "@/lib/prisma"
 import { z } from "zod"
 import { isValidObjectId } from "mongoose"
-import { ObjectId } from "mongodb"
 
 export async function getCampaigns(user_id: string) {
   const campaigns = await prisma.campaigns.findMany({
