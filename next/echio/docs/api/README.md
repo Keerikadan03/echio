@@ -4,11 +4,11 @@
 
 `next-auth` package is used to provide easy authentication.
 
-To check if a user is logged in, use the `getSession` function like such
+To check if a user is logged in, use the `getServerSession` function like such
 
 ```javascript
 export default async function Page(props) {
-  const session = await getSession()
+  const session = await getServerSession()
   if (!session || session.status === "unauthenticated") {
     return <div>Unauthenticated</div>
   }
@@ -16,7 +16,7 @@ export default async function Page(props) {
 }
 ```
 
-refer the docs : https://next-auth.js.org/getting-started/client#getsession
+refer the docs : https://next-auth.js.org/configuration/nextjs#getserversession
 
 ---
 

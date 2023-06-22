@@ -1,5 +1,5 @@
 import { getCampaigns } from "@/lib/db/campaigns"
-import { getSession } from "next-auth/react"
+import { getServerSession } from "next-auth/react"
 import Link from "next/link"
 import React from "react"
 
@@ -7,7 +7,7 @@ import CampaignCard from "../components/CampaignCard"
 import Navbar from "../components/Navbar"
 
 export default async function page() {
-  const session = await getSession()
+  const session = await getServerSession()
 
   if (!session || session.status === "unauthenticated") {
     return <div>Unauthenticated</div>
