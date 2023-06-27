@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import InfluencerCard from '../components/InfluencerCard'
+import Link from 'next/link'
 
 const page = () => {
     return (
@@ -16,11 +17,11 @@ const page = () => {
                         <input className='w-[400px] h-[32px] pl-1.5 text-sm rounded-lg border border-[rgba(0,0,0,0.15)] shadow-[2px_2px_2px_rgba(0,0,0,0.05),inset_4px_4px_4px_rgba(0,0,0,0.02)]' type="search" name="" id="" placeholder='Search' />
                     </div>
                     {/* create campaign  button */}
-                    <div className='flex justify-end items-center '>
+                    <div className='content-center '>
                         <div className='font-medium'>
-                            <button type="submit" className=" w-[90px] h-[32px] mx-3 rounded-lg text-[#6B8DE6] hover:bg-zinc-100 ">SORT WITH AI</button>
-                            <button type="submit" className=" w-[70px] h-[32px] mx-3 rounded-lg bg-white border border-[#6B8DE6] text-[#6B8DE6] hover:bg-zinc-100 ">INVITE</button>
-                            <a href='/campaignForm' className="px-3 py-[9px]  border border-[#6B8DE6] rounded-lg bg-[#6B8DE6] text-white hover:bg-blue-700 shadow-[0_3px_1px_-2px_rgba(0,0,0,0.2),0_2px_2px_rgba(0,0,0,0.14),0_1px_5px_rgba(0,0,0,0.12)]">CAMPAIGN DETAIL</a>
+                            <button type="submit" className=" mr-3 tertiary-btn medium-btn ">SORT WITH AI</button>
+                            <button type="submit" className=" mr-3 secondary-btn medium-btn ">INVITE</button>
+                            <Link href='/campaignForm' className=" medium-btn primary-btn tracking-[0.4px] ">CAMPAIGN DETAIL</Link>
                         </div>
                     </div>
 
@@ -28,11 +29,11 @@ const page = () => {
 
                 <div className=' grid grid-cols-4 gap-4 mx-10 mt-10'>
 
-                    <div className='mr-5 rounded-xl bg-white text-sm p-5 h-fit'>
+                    <div className='mr-5 rounded-xl bg-white text-sm text-[rgba(0,0,0,0.70)] p-5 h-fit'>
                         <div>
-                            <p className='text-[rgba(0,0,0,0.7)] font-semibold'>POPULARITY</p>
-                            <div className='mt-5 text-xs'>
-                                <div className='my-4 flex items-center '>
+                            <p className='text-16'>POPULARITY</p>
+                            <div className='mt-5  text-[14px]'>
+                                <div className='my-4 flex items-center  '>
 
                                     <input type="checkbox" className='mx-2' name="" id="" />
                                     <label htmlFor="" className=''>Nano(1k-9k)</label>
@@ -52,7 +53,7 @@ const page = () => {
                                 </div>
                             </div>
 
-                            <p className='mt-7 text-[rgba(0,0,0,0.7)] font-semibold '>CAMPAIGN PREFRENCE </p>
+                            <p className='mt-7  text-16 '>CAMPAIGN PREFRENCE </p>
                             <div className='mt-5 text-xs'>
                                 <div className='my-4 flex items-center'>
 
@@ -66,7 +67,7 @@ const page = () => {
                                 </div>
                             </div>
 
-                            <p className='mt-7 text-[rgba(0,0,0,0.7)] font-semibold'>PLATFORM</p>
+                            <p className='mt-7  text-16'>PLATFORM</p>
                             <div className='mt-5 text-xs'>
                                 <div className='my-4 flex items-center'>
 
@@ -80,11 +81,11 @@ const page = () => {
                                 </div>
                             </div>
 
-                            <p className='mt-7 text-[rgba(0,0,0,0.7)] font-semibold'>ENGAGEMENT RATE</p>
+                            <p className='mt-7 text-16'>ENGAGEMENT RATE</p>
 
-                            <p className='mt-7 text-[rgba(0,0,0,0.7)] font-semibold'>RATE</p>
+                            <p className='mt-7 text-16'>RATE</p>
 
-                            <p className='mt-7 text-[rgba(0,0,0,0.7)] font-semibold'>CATEGORIES</p>
+                            <p className='mt-7 text-16'>CATEGORIES</p>
                             <div className='mt-5 text-xs'>
                                 <input type="search" className='mb-3' name="" id="" placeholder='Search Category' />
                                 <div className='my-4 flex items-center'>

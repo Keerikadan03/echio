@@ -18,6 +18,8 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GITHUB_CLIENT_SECRET
     }),
     CredentialsProvider({
+       // The name to display on the sign in form (e.g. 'Sign in with...')
+      //  name: 'Credentials',
       credentials: {
         email: { label: "Email", type: "text", placeholder: "email"},
         password: { label: "Password", type: "password", placeholder: "password"}
@@ -32,7 +34,7 @@ export const authOptions: NextAuthOptions = {
         const creds = await getUserByCredentials(email, password)
         if (!creds) return null
 
-        return user
+        return user //retrieve user
       }})
 
 
