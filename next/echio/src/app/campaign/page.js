@@ -1,17 +1,49 @@
 import { getCampaigns } from "@/lib/db/campaigns"
-import { getSession } from "next-auth/react"
+import { getSession } from "next-auth/next"
+import { getServerSession } from "next-auth/next";
+// import { getSession } from 'next-auth/client'
+import { Context } from "@/types";
+// import { getServerSession } from "next-auth";
+// import { authOptions } from "../api/auth/[...nextauth]";
+import { InferGetServerSidePropsType } from "next";
+import { campaigns } from "@prisma/client";
 import Link from "next/link"
 import React from "react"
-
 import CampaignCard from "../components/CampaignCard"
 import Navbar from "../components/Navbar"
+
+
+
+// export async function getServerSideProps(ctx) {
+
+//   const session = await getServerSession(ctx.req, ctx.res, authOptions)
+
+//   if (!session || !session.user) {
+//     return {
+//       redirect: {
+//         destination: '/auth/signin',
+//         permanent: false,
+//       },
+//     }
+//   }
+
+//   const campaigns = await getCampaigns(session.user.id)
+
+//   return {
+//     props: {
+//       session: session,
+//       campaigns: campaigns
+//     }
+//   }
+
+// }
 
 export default async function page() {
   const session = await getSession()
 
-  if (!session || session.status === "unauthenticated") {
-    return <div>Unauthenticated</div>
-  }
+  // if (!session || session.status === "unauthenticated") {
+  //   return <div>Unauthenticated</div>
+  // }
 
   const campaigns = await getCampaigns(session.user.id)
 
@@ -147,10 +179,14 @@ export default async function page() {
               </div>
             </div>
             <div className="col-span-3">
-              <CampaignCard />
-              <CampaignCard />
-              <CampaignCard />
-              <CampaignCard />
+
+              {campaigns.map((campaign) => (
+                <div key={campaign.id}>
+
+                  <CampaignCard name={campaign.name} description={campaign.description} campaign_type={campaign.campaign_type} image={campaign.image} />
+                </div>
+              ))}
+
             </div>
           </div>
         </div>
