@@ -1,10 +1,8 @@
 import { getCampaigns } from "@/lib/db/campaigns"
+
 import { getSession } from "next-auth/next"
 import { getServerSession } from "next-auth/next";
-// import { getSession } from 'next-auth/client'
 import { Context } from "@/types";
-// import { getServerSession } from "next-auth";
-// import { authOptions } from "../api/auth/[...nextauth]";
 import { InferGetServerSidePropsType } from "next";
 import { campaigns } from "@prisma/client";
 import Link from "next/link"
@@ -39,7 +37,7 @@ import Navbar from "../components/Navbar"
 // }
 
 export default async function page() {
-  const session = await getSession()
+  const session = await getServerSession()
 
   // if (!session || session.status === "unauthenticated") {
   //   return <div>Unauthenticated</div>
