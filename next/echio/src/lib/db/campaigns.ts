@@ -7,8 +7,7 @@ export async function getCampaigns(user_id: string) {
     where: {
       owner_id: user_id
     }
-  })
-
+  });
   return campaigns
 }
 
