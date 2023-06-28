@@ -17,7 +17,7 @@ export async function Page() {
 
     const campaigns = await getCampaigns(session.user.id)
 }
-const CampaignCard = ({ campaigns }) => {
+const CampaignCard = (campaigns) => {
 
 
 
