@@ -1,19 +1,22 @@
 import { getCampaigns } from "@/lib/db/campaigns"
-import { getServerSession } from "next-auth/react"
+import { getServerSession } from "next-auth/next"
 import Link from "next/link"
 import React from "react"
 
 import CampaignCard from "../components/CampaignCard"
 import Navbar from "../components/Navbar"
+import { authOptions } from "@/pages/api/auth/[...nextauth]"
 
 export default async function page() {
-  const session = await getServerSession()
+  const session = await getServerSession(authOptions)
 
   if (!session || session.status === "unauthenticated") {
     return <div>Unauthenticated</div>
   }
 
   const campaigns = await getCampaigns(session.user.id)
+
+  console.log(campaigns)
 
   return (
     <>
