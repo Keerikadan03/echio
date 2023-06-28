@@ -19,38 +19,38 @@ const InfluencerCard = () => {
                         </div>
 
                         {/* engagement div */}
-                        <div className='flex mt-1.5'>
-                            <div className='h-[50px] w-[101px] bg-[rgba(107,141,230,0.1)] pt-2 rounded-md order-0 mr-2'>
-                                <p className='text-[rgba(40,40,40,0.55)] text-[16px] flex justify-center items-center'>68M</p>
-                                <p className='font-semibold text-[14px] flex justify-center items-center mt-1'>Reach</p>
-
+                        <div className='flex flex-cols mt-1.5 gap-[10px] '>
+                            <div className='h-[53px] w-[104px] bg-[rgba(107,141,230,0.1)]  pt-2  rounded-md  '>
+                                <p className='text-[rgba(40,40,40,0.55)] text-[18px] flex justify-center items-center '>68M</p>
+                                <p className=' text-[14px] text-[rgba(0,0,0,0.80)] flex justify-center items-center mt-1'>Reach</p>
                             </div>
-                            <div className='h-[50px] w-[101px] bg-[rgba(107,141,230,0.1)] pt-2 rounded-md order-1 mr-2'>
-                                <p className='text-[rgba(40,40,40,0.55)] text-[16px] flex justify-center items-center'>20.2%</p>
-                                <p className='font-semibold text-[14px] flex justify-center items-center mt-1'>Engagement</p>
+                            <div className='h-[53px] w-[104px] bg-[rgba(107,141,230,0.1)] pt-2 rounded-md'>
+                                <p className='text-[rgba(40,40,40,0.55)] text-[18px] flex justify-center items-center'>20.2%</p>
+                                <p className=' text-[14px] text-[rgba(0,0,0,0.80)]  flex justify-center items-center mt-1'>Engagement</p>
 
-                            </div>   <div className='h-[50px] w-[101px] bg-[rgba(107,141,230,0.1)] pt-2 rounded-md order-2 mr-2'>
-                                <p className='text-[rgba(40,40,40,0.55)] text-[16px] flex justify-center items-center'>20k</p>
-                                <p className='font-semibold text-[14px] flex justify-center items-center mt-1'>Avg. Likes</p>
+                            </div>   <div className='h-[53px] w-[104px] bg-[rgba(107,141,230,0.1)] pt-2 rounded-md '>
+                                <p className='text-[rgba(40,40,40,0.55)] text-[18px] flex justify-center items-center'>20k</p>
+                                <p className=' text-[14px] text-[rgba(0,0,0,0.80)] flex justify-center items-center mt-1'>Avg. Likes</p>
 
-                            </div>   <div className='h-[50px] w-[101px] bg-[rgba(107,141,230,0.1)] pt-2 rounded-md order-3'>
-                                <p className='text-[rgba(40,40,40,0.55)] text-[16px] flex justify-center items-center'>1M</p>
-                                <p className='font-semibold text-[14px] flex justify-center items-center mt-1'>Avg. Views</p>
+                            </div>   <div className='h-[53px] w-[104px] bg-[rgba(107,141,230,0.1)] pt-2 rounded-md '>
+                                <p className='text-[rgba(40,40,40,0.55)] text-[18px] flex justify-center items-center'>1M</p>
+                                <p className=' text-[14px] text-[rgba(0,0,0,0.80)] flex justify-center items-center mt-1'>Avg. Views</p>
 
                             </div>
                         </div>
-
+                        {/* INSTA/youtube div  */}
                         <div className='flex mt-[14px]  '>
                             <div className='flex justify-center items-center mr-2 bg-[rgba(107,141,230,0.1)] rounded-md font-medium px-[10px] py-[6px] order-0 '><Image className='inline mr-1  ' src="/images/instagram.png" width={14} height={14} />
                                 <p className='mr-2'>Instagram</p>
                                 <p>500k</p>
                             </div>
 
-                            <div className='flex justify-center items-center bg-[rgba(107,141,230,0.1)] rounded-md font-medium px-[10px] py-[6px] order-1'><Image className='inline mr-1' src="/images/youtube-icon.png" width={18} height={18} />
+                            <div className='content-center small-btn bg-[rgba(107,141,230,0.1)] rounded-md order-1'><Image className='inline mr-1' src="/images/youtube-icon.png" width={18} height={18} />
                                 <p className='mr-2'>Youtube</p>
                                 <p>500k</p></div>
                         </div>
                     </div>
+
                     <div className=" w-1/3 relative mr-1">
                         <div className='  flex justify-end items-center'>
                             <p className=' order-0 mr-2 text-[rgba(0,0,0,0.55)] font-semibold text-sm'>Rate</p>
