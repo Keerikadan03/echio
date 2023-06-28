@@ -1,14 +1,16 @@
-import React from 'react'
-import Signup from './signup'
+import { authOptions } from "@/pages/api/auth/[...nextauth]"
+import { getServerSession } from "next-auth"
+import { redirect } from "next/navigation"
 
+import LoginPage from "./login-page"
 
-export default async function Page() {
+const Page = async () => {
+  const session = await getServerSession(authOptions)
+  if (session) {
+    redirect("/")
+  }
 
-  return (
-
-      <>
-      
-      <Signup />
-      </>
-  )
+  return <LoginPage />
 }
+
+export default Page

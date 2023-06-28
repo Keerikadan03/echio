@@ -8,7 +8,7 @@ function random(min: number, max: number) {
   return Math.floor(Math.random() * (max - min) + min)
 }
 
-const ON = false
+const ON = true
 
 export async function fillDatabase() {
 

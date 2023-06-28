@@ -7,7 +7,7 @@ import { InferGetServerSidePropsType } from "next";
 import { campaigns } from "@prisma/client";
 import Link from "next/link"
 import React from "react"
-import CampaignCard from "../components/CampaignCard"
+import CampaignCard from "../components/campaign/CampaignCard"
 import Navbar from "../components/Navbar"
 
 

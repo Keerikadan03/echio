@@ -38,11 +38,11 @@ export const authOptions: NextAuthOptions = {
 
   ],
   pages: {
-    signIn: "/signin",
+    signIn: "/login",
     signOut: "/signout",
-    error: "/signin",
+    error: "/login",
     verifyRequest: "/verify-request",
-    newUser: undefined,
+    newUser: "/",
   },
   callbacks: {
     session: async ({ session, token }) => {
