@@ -2,6 +2,7 @@ import prisma from "@/lib/prisma"
 import { isValidObjectId } from "mongoose"
 import { z } from "zod"
 
+/** Influencer zod model for input validation */
 const Influencer = z.object({
   user_id: z.string().refine(isValidObjectId),
   name: z.string(),
@@ -13,6 +14,10 @@ const Influencer = z.object({
   image: z.string().url().optional()
 })
 
+/**
+ * Create an influencer object.
+ * Validates the input using the Influencer zod model.
+ */
 export async function createInfluencer(props: z.infer<typeof Influencer>) {
   const influencer_props = Influencer.parse(props)
 
@@ -23,6 +28,10 @@ export async function createInfluencer(props: z.infer<typeof Influencer>) {
   return influencer
 }
 
+/**
+ * Get the influencer object by their id.
+ * Assumes influencer_id is clean.
+ */
 export async function getInfluencer(influencer_id: string) {
   const influencer = await prisma.influencers.findUnique({
     where: {
@@ -33,6 +42,7 @@ export async function getInfluencer(influencer_id: string) {
   return influencer
 }
 
+/** InfluencerQuery zod model for input validation */
 const InfluencerQuery = z.object({
   min_reach: z.number().min(0).optional(),
   max_reach: z.number().min(0).optional(),
@@ -46,6 +56,10 @@ const InfluencerQuery = z.object({
   platform_instagram: z.boolean().default(true)
 })
 
+/**
+ * Get the influencer objects by the query parameters.
+ * Validates the input using the InfluencerQuery zod model.
+ */
 export async function getInfluencers(_query: z.infer<typeof InfluencerQuery>) {
   const _query_props = InfluencerQuery.parse(_query)
 
@@ -69,6 +83,10 @@ export async function getInfluencers(_query: z.infer<typeof InfluencerQuery>) {
   return influencers
 }
 
+/**
+ * Add an influencer to a campaign's ongoing list.
+ * Validates the influencer_id and campaign_id.
+ */
 export async function addInfluencerToCampaign(influencer_id: string, campaign_id: string) {
   const _influencer_id = z.string().refine(isValidObjectId).parse(influencer_id)
   const _campaign_id = z.string().refine(isValidObjectId).parse(campaign_id)
@@ -79,9 +97,12 @@ export async function addInfluencerToCampaign(influencer_id: string, campaign_id
       campaign_id: _campaign_id
     }
   })
-
 }
 
+/**
+ * Add an influencer to a campaign's shortlisted list.
+ * Validates the influencer_id and campaign_id.
+ */
 export async function shortlistInfluencer(influencer_id: string, campaign_id: string) {
   const _influencer_id = z.string().refine(isValidObjectId).parse(influencer_id)
   const _campaign_id = z.string().refine(isValidObjectId).parse(campaign_id)

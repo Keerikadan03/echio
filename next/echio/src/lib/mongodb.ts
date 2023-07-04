@@ -1,3 +1,7 @@
+// This module exports the mongo client, which is currently used only by Next Auth
+// Use prisma for all other database access
+
+
 import { MongoClient } from 'mongodb'
 
 if (!process.env.DATABASE_URL) {

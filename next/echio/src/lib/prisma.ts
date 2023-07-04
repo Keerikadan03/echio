@@ -1,3 +1,6 @@
+// This module exports the prisma client.
+// No need to change anything here
+
 import { PrismaClient } from '@prisma/client'
 
 declare global {
