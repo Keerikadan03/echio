@@ -75,16 +75,15 @@ export default async function LoginForm() {
                 <input
                   type="submit"
                   className="w-full flex justify-center items-center py-2 border border-[#1976D2] rounded bg-[#1976D2] text-white hover:bg-transparent hover:text-[#1976D2] hover:border-[#1976D2] shadow-[0_3px_1px_-2px_rgba(0,0,0,0.2),0_2px_2px_rgba(0,0,0,0.14),0_1px_5px_rgba(0,0,0,0.12)]"
-                  text="submit"
                 />
               </div>
               <div className="flex justify-between my-5">
                 <p className="text-[rgba(0,0,0,0.4)]">or Sign in with your mail</p>
                 <p className="">
                   New to <b>ECHIO?</b>{" "}
-                  <a href="/signup" className="text-[#1976D2] ">
+                  <Link href="/signup" className="text-[#1976D2] ">
                     Create your account
-                  </a>
+                  </Link>
                 </p>
               </div>
               <div className="flex justify-left ">

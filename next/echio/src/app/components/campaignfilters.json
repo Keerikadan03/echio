@@ -1,0 +1,24 @@
+[
+    
+    {
+        "filterName":"Campaign Status",
+        "types":["Active Campaign","Upcoming Campaign","Past Campaign"]
+    },
+    {
+        "filterName":"Campaign Prefrence",
+        "types":["Barter","Paid"]
+    },
+    {
+        "filterName":"Platform",
+        "types":["Youtube","Instagram","Both"]
+    },
+    {
+        "filterName":"Campaign Status",
+        "types":["Active Campaign","Upcoming Campaign","Past Campaign"]
+    },
+    {
+        "filterName":"Categories",
+        "types":["Autos & Vehical","Beauty","Blogs And Travel"]
+    }
+
+]

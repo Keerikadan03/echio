@@ -1,6 +1,4 @@
 import { getCampaigns } from "@/lib/db/campaigns"
-
-import { getSession } from "next-auth/next"
 import { getServerSession } from "next-auth/next";
 import { Context } from "@/types";
 import { InferGetServerSidePropsType } from "next";
@@ -9,42 +7,16 @@ import Link from "next/link"
 import React from "react"
 import CampaignCard from "../components/campaign/CampaignCard"
 import Navbar from "../components/Navbar"
+import Filter from "../components/Filter"
 
 
 
-// export async function getServerSideProps(ctx) {
-
-//   const session = await getServerSession(ctx.req, ctx.res, authOptions)
-
-//   if (!session || !session.user) {
-//     return {
-//       redirect: {
-//         destination: '/auth/signin',
-//         permanent: false,
-//       },
-//     }
-//   }
-
-//   const campaigns = await getCampaigns(session.user.id)
-
-//   return {
-//     props: {
-//       session: session,
-//       campaigns: campaigns
-//     }
-//   }
-
-// }
 
 export default async function page() {
   const session = await getServerSession()
 
-  // if (!session || session.status === "unauthenticated") {
-  //   return <div>Unauthenticated</div>
-  // }
-
-  // const campaigns = await getCampaigns(session.user.id)
-  const campaigns = await getCampaigns("649ac92bf56eb1ff734bd4b9");
+  const campaigns = await getCampaigns(session.user.id)
+  // const campaigns = await getCampaigns("649ac92bf56eb1ff734bd4b9");
 
   return (
     <>
@@ -80,102 +52,7 @@ export default async function page() {
           {/* card and filter */}
           <div className=" grid grid-cols-4 gap-[10px] mt-10">
             <div className="mr-5 rounded-xl bg-white text-sm p-5 h-fit shadow-[0_1px_4px_rgba(149,149,149,0.25)]">
-              <div className="">
-                <p className="font-semibold text-[rgba(0,0,0,0.7)]">Campaign Status</p>
-                <div className="mt-3 text-xs ">
-                  <div className="my-3 flex items-center ">
-                    <input type="checkbox" className="mx-2" name="" id="" />
-                    <label htmlFor="" className="">
-                      Active Campaign
-                    </label>
-                  </div>
-                  <div className="my-3 flex items-center">
-                    <input type="checkbox" className="mx-2" name="" id="" />
-                    <label htmlFor="">Upcoming Campaign</label>
-                  </div>
-                  <div className="my-3 flex items-center">
-                    <input type="checkbox" className="mx-2" name="" id="" />
-                    <label htmlFor="">Past Campaign</label>
-                  </div>
-                </div>
-
-                <p className="font-semibold text-[rgba(0,0,0,0.7)] mt-5">Campaign Prefrence</p>
-
-                <div className="mt-3 text-xs">
-                  <div className="my-3 flex items-center">
-                    <input type="checkbox" className="mx-2" name="" id="" />
-                    <label htmlFor="">Barter</label>
-                  </div>
-                  <div className="my-3 flex items-center">
-                    <input type="checkbox" className="mx-2" name="" id="" />
-                    <label htmlFor="">Paid</label>
-                  </div>
-                </div>
-
-                <p className="font-semibold text-[rgba(0,0,0,0.7)] mt-5">Platform</p>
-
-                <div className="mt-3 text-xs">
-                  <div className="my-3 flex items-center">
-                    <input type="checkbox" className="mx-2" name="" id="" />
-                    <label htmlFor="">YouTube</label>
-                  </div>
-                  <div className="my-3 flex items-center">
-                    <input type="checkbox" className="mx-2" name="" id="" />
-                    <label htmlFor="">Instagram</label>
-                  </div>
-                  <div className="my-3 flex items-center">
-                    <input type="checkbox" className="mx-2" name="" id="" />
-                    <label htmlFor="">Both</label>
-                  </div>
-                </div>
-                <div className="mt-5 ">
-                  <label className=" font-semibold text-[rgba(0,0,0,0.7)]">LOCATION</label>
-                  <input
-                    type="text"
-                    className="w-full p-1 mt-3 text-xs border border-gray-300 rounded-sm"
-                    name=""
-                    id=""
-                    placeholder="City"
-                  />
-                </div>
-                <div className="mt-5">
-                  <label className="mt-5 font-semibold text-[rgba(0,0,0,0.7)]">DATE</label>
-                  <input
-                    type="text"
-                    className="w-full p-1 mt-3 text-xs border border-gray-300 rounded-sm"
-                    name=""
-                    id=""
-                    placeholder="City"
-                  />
-                </div>
-
-                <div className="mt-5 text-xs">
-                  <label className="font-semibold text-[rgba(0,0,0,0.7)] text-sm">CATEGORIES</label>
-                  <input
-                    type="search"
-                    className="mb-3 mt-3 p-1 w-full text-xs border border-gray-300 rounded-sm"
-                    name=""
-                    id=""
-                    placeholder="Search Category"
-                  />
-                  <div className="my-3 flex items-center">
-                    <input type="checkbox" className="mx-2" name="" id="" />
-                    <label htmlFor="">Autos & Vehicles</label>
-                  </div>
-
-                  <div className="my-3 flex items-center">
-                    <input type="checkbox" className="mx-2" name="" id="" />
-                    <label htmlFor="">Beauty</label>
-                  </div>
-                  <div className="my-3 flex items-center">
-                    <input type="checkbox" className="mx-2" name="" id="" />
-                    <label htmlFor="">Blogs & Travel</label>
-                  </div>
-                  <a href="" className=" mt-2 text-sky-600">
-                    More Category
-                  </a>
-                </div>
-              </div>
+              <Filter />
             </div>
             <div className="col-span-3">
 
