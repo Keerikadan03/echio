@@ -20,12 +20,12 @@ export default async function LoginForm() {
         <div className="w-1/2 items-center justify-center ml-14">
             <div className="flex">
               <Image src="/images/echio-logo.png"
-              className="l-28 h-8 mt-3 ml-6 mr-3"
+              className="h-9 w-8 mt-3 mr-3"
               width={28}
               height={27} 
               alt="Echio-logo"
               />
-              <h1 className="flex items-center justify-center top-[14px] text-bold text-lg my-3 font-Roboto">Echio</h1>
+              <h1 className="flex items-center justify-center top-[14px] text-bold text-lg my-4 font-Roboto">Echio</h1>
             </div>
             <div className="mt-5 mb-8">
               <p className="block text-lg mr-14 text-semibold">Sign in</p>
