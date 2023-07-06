@@ -28,7 +28,6 @@ const page = () => {
                 </div>
 
                 <div className=' grid grid-cols-4 gap-4 mx-10 mt-10'>
-
                     <div className='mr-5 rounded-xl bg-white text-sm text-[rgba(0,0,0,0.70)] p-5 h-fit'>
                         <div>
                             <p className='text-16'>POPULARITY</p>
