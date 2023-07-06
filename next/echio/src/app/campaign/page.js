@@ -15,8 +15,12 @@ import Filter from "../components/Filter"
 export default async function page() {
   const session = await getServerSession()
 
+  // if (!session || session.status === "unauthenticated") {
+  //   return <div>Unauthenticated</div>
+  // }
+
   const campaigns = await getCampaigns(session.user.id)
-  // const campaigns = await getCampaigns("649ac92bf56eb1ff734bd4b9");
+  //const campaigns = await getCampaigns("649ac92bf56eb1ff734bd4b9");
 
   return (
     <>
