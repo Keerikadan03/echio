@@ -1,49 +1,52 @@
-import { Context } from "@/types";
-import { getServerSession } from "next-auth";
-import { getCampaigns } from "@/lib/db/campaigns";
-import { InferGetServerSidePropsType } from "next";
-import { campaigns } from "@prisma/client";
+'use client'
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { FormControlLabel, Checkbox } from '@mui/material'
 
 
-export async function Page() {
-    const session = await getSession()
-    // if (!session || session.status === "unauthenticated") {
-    //     // return <div>Unauthenticated</div>
-    // }
-
-
-    // const campaigns = await getCampaigns(session.user.id)
-    
-}
 const CampaignCard = (campaigns) => {
 
 
 
     return (
         <>
-
-
             <div className="mb-4 text-xs ">
-                <div className="p-2 flex border-r border-b border-l border-gray-300 lg:border-l-0 rounded-lg lg:border-gray-300 bg-white shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
-                    <div className='absolute bg-white rounded-br-md pr-2 pb-1 '>
-                        <input type="checkbox" name="" id="" className='rounded-none mt-1 ml-1 ' />
+                <div className="p-2 flex  z-20 border-r border-b border-l border-gray-300 lg:border-l-0 rounded-lg lg:border-gray-300 bg-white shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
+                    <div className='absolute z-40  bg-white rounded-br-md w-[30px] h-[30px]'>
+                        <div className=' relative bottom-[8px] right-[8px]'>
+
+                            <Checkbox
+                                className='mb-2'
+                                sx={{
+
+                                    '& .MuiSvgIcon-root': {
+
+                                    }
+                                }}
+
+                                id='checkbox'
+                            />
+                        </div>
                     </div>
-                    <div className="mr-3 w-[180px] h-[110px] rounded-lg bg-cover text-center overflow-hidden" style={{ backgroundImage: 'url(/images/model.jpg)' }} title="campaign-image">
+                    <div className="mr-3 z-30 w-[180px] h-[110px] rounded-lg bg-cover text-center overflow-hidden" style={{ backgroundImage: 'url(/images/model.jpg)' }} title="campaign-image">
                     </div>
-                    <div className="pl-2 w-3/5">
+                    <div className="pl-2 w-3/5 relative">
                         <div className='flex'>
                             <p className="text-gray-900 font-semibold text-xl mb-1">{campaigns.name} </p>
                             <p className='text-[rgba(0,0,0,0.55)] font-normal text-md w-max mt-2 ml-2 '>29/April-30/May</p>
                         </div>
 
                         <p className="text-gray-700">{campaigns.description}</p>
-                        <div className='flex flex-row mt-[21px]  '>
-                            <div className='flex justify-center items-center mr-2 bg-[rgba(107,141,230,0.1)] rounded-md font-medium px-[8px] py-[4px] '><Image className='inline mr-1  ' src="/images/instagram.png" width={14} height={14} />Instagram</div>
+                        <div className='absolute bottom-0 '>
+                            <div className=' flex'>
 
-                            <div className='flex justify-center items-center bg-[rgba(107,141,230,0.1)] rounded-md font-medium px-[8px] py-[4px] '><Image className='inline mr-1' src="/images/youtube-icon.png" width={18} height={18} />YouTube</div>
+                                <div className='content-center mr-2 bg-[rgba(107,141,230,0.1)] rounded-md font-medium px-[10px] py-[6px] order-0 '>
+                                    <Image className='inline mr-1  ' src="/images/instagram.png" width={14} height={14} />Instagram
+                                </div>
+
+                                <div className='content-center order-1 bg-[rgba(107,141,230,0.1)] rounded-md font-medium px-[10px] py-[6px] '><Image className='inline mr-1' src="/images/youtube-icon.png" width={18} height={18} />YouTube</div>
+                            </div>
                         </div>
                     </div>
                     <div className=" w-1/3 relative mr-1">

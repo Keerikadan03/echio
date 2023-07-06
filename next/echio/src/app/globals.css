@@ -35,6 +35,12 @@ body {
 }
 
 
+/* 
+  .MuiInputBase-colorPrimary{
+    color:red;
+    border-color: red;
+    
+  } */
 
 .content-center{
   display: flex;

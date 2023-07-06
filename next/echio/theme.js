@@ -2,14 +2,7 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
     components: {
         components: {
-            // errorTextField: {
-            //     '& .MuiOutlinedInput-root': {
-            //       borderColor: 'red',
-            //     },
-            //     '& .MuiFormHelperText-root': {
-            //       color: 'red',
-            //     },
-            //   },
+
             MuiTextField: {
                 styleOverrides: {
                     // Name of the slot
@@ -40,6 +33,9 @@ const theme = createTheme({
         primary: {
             main: "rgba(0,0,0,0.54)",
         },
+        secondary: {
+            main: "rgb(240,128,128)"
+        }
     },
 });
 

@@ -86,9 +86,9 @@ export default async function LoginForm() {
                 <p className="text-[rgba(0,0,0,0.4)]">or Sign in with your mail</p>
                 <p className="">
                   New to <b>ECHIO?</b>{" "}
-                  <a href="/signup" className="text-[#1976D2] ">
+                  <Link href="/signup" className="text-[#1976D2] ">
                     Create your account
-                  </a>
+                  </Link>
                 </p>
               </div>
               <div className="flex justify-left ">
