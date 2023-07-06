@@ -10,26 +10,30 @@ export default async function LoginForm() {
   const csrfToken = await getCsrfToken()
 
   return (
+    <div className="w-1/2 bg-[#FFF] relative items-center justify-center rounded-r-xl">
     <ThemeProvider theme={theme}>
       <form method="POST" action="/api/auth/callback/credentials">
         {/* SIGN IN */}
-        <div className="w-1/2 ">
-          <div className=" py-5 px-10 bg-white rounded-r-xl shadow-[0_3px_8px_rgba(0,0,0,0.1)] drop-shadow-[rgba(0,0,0,0.1)] ">
-            {/* <p className='block text-sm text-bold'>Lets get you inside</p> */}
+        <div className="w-1/2 items-center justify-center ml-14">
             <div className="flex">
-              <Image src="/images/echio-logo.png" className="h-8 mt-2 mr-2" width={30} height={5} alt="Echio-logo" />
-              <h1 className="text-xl my-2 font-medium">Echio</h1>
+              <Image src="/images/echio-logo.png"
+              className="l-28 h-8 mt-3 ml-6 mr-3"
+              width={28}
+              height={27} 
+              alt="Echio-logo"
+              />
+              <h1 className="flex items-center justify-center top-[14px] text-bold text-lg my-3 font-Roboto">Echio</h1>
             </div>
             <div className="mt-5 mb-8">
-              <p className="block text-lg text-semibold">Sign in</p>
-              <p className="block text-gray-600 ">to access Echio Home</p>
+              <p className="block text-lg mr-14 text-semibold">Sign in</p>
+              <p className="block text-gray-600 mr-14">to access Echio Home</p>
             </div>
 
             <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
             <div className="">
-              <div className="  mb-3">
+              <div className="  mr-14 mb-3">
                 <TextField
-                  className="w-full "
+                  className="w-full mr-14"
                   sx={{}}
                   required
                   id="outlined-required"
@@ -68,13 +72,13 @@ export default async function LoginForm() {
               <div className=" my-5 flex items-center">
                 <input type="checkbox" className="rounded-none " id="check2" />
                 <label className=" mx-1 " htmlFor="check2">
-                  Yes, I understand and agree to the <b>ECHIO</b> Service
+                  Yes, I understand and agree to the <b>ECHIO</b> Services
                 </label>
               </div>
               <div className=" mt-5">
                 <input
                   type="submit"
-                  className="w-full flex justify-center items-center py-2 border border-[#1976D2] rounded bg-[#1976D2] text-white hover:bg-transparent hover:text-[#1976D2] hover:border-[#1976D2] shadow-[0_3px_1px_-2px_rgba(0,0,0,0.2),0_2px_2px_rgba(0,0,0,0.14),0_1px_5px_rgba(0,0,0,0.12)]"
+                  className="w-full flex justify-center items-center py-3 border border-[#1976D2] rounded bg-[#1976D2] text-white hover:bg-transparent hover:text-[#1976D2] hover:border-[#1976D2] shadow-[0_3px_1px_-2px_rgba(0,0,0,0.2),0_2px_2px_rgba(0,0,0,0.14),0_1px_5px_rgba(0,0,0,0.12)]"
                   text="submit"
                 />
               </div>
@@ -135,8 +139,8 @@ export default async function LoginForm() {
               </div>
             </div>
           </div>
-        </div>
       </form>
     </ThemeProvider>
+    </div>
   )
 }
