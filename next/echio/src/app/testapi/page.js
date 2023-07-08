@@ -1,5 +1,5 @@
 import { getCampaigns } from "@/lib/db/campaigns"
-import { getCampaignDetails } from '@/lib/db/campaignDetails'
+import { getCampaignDetails } from '@/lib/db/campaigns/campaignDetails'
 import { getServerSession } from "next-auth/next";
 import { Context } from "@/types";
 import { InferGetServerSidePropsType } from "next";

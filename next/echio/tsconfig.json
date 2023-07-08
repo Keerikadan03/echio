@@ -35,7 +35,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-, "src/app/campaign/page.js"  ],
+, "src/app/campaign/page.js", "src/pages/api/campaignDetails/[campaigninfluencers].js"  ],
   "exclude": [
     "node_modules"
   ]
