@@ -16,15 +16,18 @@ export default async function handler(
     // var { page, perPage } = 
     // need to apply check whether page and perpage is integer or not and also need to verify that campagin id 
 
-
-    const page = req.query.page || 0;
+    
+    const page = req.query.page || 1;
     const perPage = req.query.perPage || 10 ;
     const {campaignId} = req.query; // getting influencer id
     
+    //applying pagination: calculating indexes of data need to pass based on requirements.
     const startIndex = (parseInt(page)-1)*parseInt(perPage);
     const endIndex = startIndex + parseInt(perPage);
 
+    //fetching campaign datails from the database for particular campaignid
     const campaignData = await getCampaignDetails(campaignId);
+    
     // to check whether campaign exist or not if no data find out with particular campaign id that means campaign doesn't exists
     if(campaignData.length==0){
       res.status(400).json({ error: "Campaign Doesn't exist"})
@@ -38,12 +41,10 @@ export default async function handler(
     
     const campaignInfluencers = await getShortlistedInfluencers(campaignId);
 
-    // console.log(data);
     const slicedData = campaignInfluencers.slice(startIndex, endIndex);
 
+
     return res.status(200).json({ message: {"page no: ": page, "perpage ": perPage, "data":slicedData}, error: ''});
-
-
 
 
 }
